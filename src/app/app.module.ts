@@ -11,9 +11,16 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 
+// components
+import { PasswordResetComponent } from './components/auth/password-reset/password-reset.component';
+import { LoginComponent } from './components/auth/login/login.component';
+
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    PasswordResetComponent,
   ],
   imports: [
     BrowserModule,

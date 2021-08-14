@@ -15,6 +15,7 @@ export class AuthService {
   user$: Observable<firebase.User>;
   private authState: any;
   currentId: any;
+  
 
   constructor(private db:AngularFireDatabase,private router:Router,private afAuth:AngularFireAuth) { 
     this.user$ = afAuth.authState;
@@ -25,7 +26,7 @@ export class AuthService {
   }
 
   // email & password login
-  login(email: string, password: string) {
+  login(email:string, password:string) {
     this.afAuth.signInWithEmailAndPassword(email, password)
       .then((value) => {
         if (!value.user.emailVerified) {
@@ -46,8 +47,7 @@ export class AuthService {
         await firebase.auth().currentUser.sendEmailVerification();
         this.authState = user;
         const currentId = this.authState.user.uid;
-        const status = 'online';
-        this.setUserData(email, displayName, status, currentId);
+        this.setUserData(email, displayName, currentId);
         this.router.navigateByUrl('/login');
       })
       .catch((error: any) => {
@@ -56,12 +56,11 @@ export class AuthService {
   }
 
   // move user data to real-time database
-  setUserData(email: string, displayName: string, status: string, currentId: any): void {
+  setUserData(email: string, displayName: string, currentId: any): void {
     const path = `users/${currentId}`;
     const data = {
       email,
       displayName,
-      status
     };
     this.db.object(path).update(data)
       .catch(error => console.log(error));
@@ -74,8 +73,7 @@ export class AuthService {
       .then((value: firebase.auth.UserCredential) => {
         console.log('Success', value), this.router.navigateByUrl('/home');
         const currentId = value.user.uid;
-        const status = 'online';
-        this.setUserData(value.user.email, value.user.displayName, status, currentId);
+        this.setUserData(value.user.email, value.user.displayName, currentId);
       })
       .catch((error: any) => {
         console.log('Something went wrong: ', error);
