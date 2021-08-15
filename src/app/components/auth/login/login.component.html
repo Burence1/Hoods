@@ -7,10 +7,63 @@
             src="https://img.icons8.com/color/100/000000/google-logo.png"
             alt="">
         </div><span class="form__span">or use your email account</span>
-        <input class="form__input" type="text" placeholder="Email">
-        <input class="form__input" type="password" placeholder="Password"><a class="form__link">Forgot your
-          password?</a>
-        <button class="form__button button submit">SIGN IN</button>
+        <form #formData="ngForm" (ngSubmit)="emailLogin(formData)" class="p-3">
+          <div class="mb-3">
+            <label for="LoginEmail" class="form-label header">Email</label>
+            <br />
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Enter your email</mat-label>
+              <input matInput placeholder="janedoe@gmail.com" (ngModel)="(email)" id="email" name="email" #email="ngModel"
+                required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" minlength="10" maxlength="30" />
+            </mat-form-field>
+            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+              <div *ngIf="email.errors.pattern">
+                Enter a valid email address.
+              </div>
+              <div *ngIf="email.errors.required">
+                Email is required.
+              </div>
+              <div *ngIf="email.errors.minlength">
+                Email must be at least 10 characters long.
+              </div>
+              <div *ngIf="email.errors.maxlength">
+                Email is too long.
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="LoginPassword" class="form-label header">Password</label>
+            <br />
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Enter your password</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'" placeholder="********" (ngModel)="(password)" id="password"
+                name="password" #password="ngModel" required
+                pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$" maxlength="20" />
+              <span class="hide" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{
+                  hide ? "visibility_off" : "visibility"
+                  }}</mat-icon>
+              </span>
+            </mat-form-field>
+            <div *ngIf="
+                                  password.invalid &&
+                                  (password.dirty || password.touched)
+                                " class="alert alert-danger">
+              <div *ngIf="password.errors.required">
+                Password is required.
+              </div>
+              <div *ngIf="password.errors.pattern">
+                Password should be atleast 8 characters long and
+                should contain one number, one character and one
+                special character.
+              </div>
+            </div>
+          </div>
+          <button mat-raised-button type="submit" [disabled]="!formData.valid" class="auth-btn">
+            Sign In <i class="fas fa-sign-in-alt"></i>
+          </button>
+        </form>
       </form>
     </div>
     <div class="switch" id="switch-cnt">
