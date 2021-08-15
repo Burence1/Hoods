@@ -3,18 +3,19 @@
     <div class="container b-container" id="b-container">
       <form class="form" id="b-form" method="" action="">
         <h2 class="form_title title">Sign in to Website</h2>
-        <div class="form__icons"><img class="form__icon"
-            src="https://img.icons8.com/color/100/000000/google-logo.png"
-            alt="">
+        <div class="form__icons">
+          <button (click)="googleLogin()">
+            <img class="form__icon" src="https://img.icons8.com/color/100/000000/google-logo.png" alt=""></button>
         </div><span class="form__span">or use your email account</span>
+
         <form #formData="ngForm" (ngSubmit)="emailLogin(formData)" class="p-3">
           <div class="mb-3">
             <label for="LoginEmail" class="form-label header">Email</label>
             <br />
             <mat-form-field class="full-width" appearance="outline">
               <mat-label>Enter your email</mat-label>
-              <input matInput placeholder="janedoe@gmail.com" (ngModel)="(email)" id="email" name="email" #email="ngModel"
-                required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" minlength="10" maxlength="30" />
+              <input matInput placeholder="janedoe@gmail.com" (ngModel)="(email)" id="email" name="email"
+                #email="ngModel" required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" minlength="10" maxlength="30" />
             </mat-form-field>
             <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
               <div *ngIf="email.errors.pattern">
@@ -36,8 +37,8 @@
             <br />
             <mat-form-field class="full-width" appearance="outline">
               <mat-label>Enter your password</mat-label>
-              <input matInput [type]="hide ? 'password' : 'text'" placeholder="********" (ngModel)="(password)" id="password"
-                name="password" #password="ngModel" required
+              <input matInput [type]="hide ? 'password' : 'text'" placeholder="********" (ngModel)="(password)"
+                id="password" name="password" #password="ngModel" required
                 pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$" maxlength="20" />
               <span class="hide" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                 [attr.aria-pressed]="hide">
