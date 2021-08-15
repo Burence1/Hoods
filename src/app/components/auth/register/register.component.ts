@@ -9,7 +9,6 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class RegisterComponent implements OnInit {
 
   hide = true;
-
   email: string;
   password: string;
   confirmPassword: string;

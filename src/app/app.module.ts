@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,13 +15,24 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 // components
 import { PasswordResetComponent } from './components/auth/password-reset/password-reset.component';
 import { LoginComponent } from './components/auth/login/login.component';
+import { RegisterComponent } from './components/auth/register/register.component';
 
+// services
+import { AuthService } from './services/auth/auth.service';
+import { HoodsService } from './services/hoods/hoods.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// angular material extensions
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     PasswordResetComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,8 +41,16 @@ import { LoginComponent } from './components/auth/login/login.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+
+    // Angular material
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule
   ],
-  providers: [],
+  providers: [AuthService,HoodsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
