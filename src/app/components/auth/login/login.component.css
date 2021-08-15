@@ -182,6 +182,10 @@
   left: -60%;
   transition: 1.25s;
 }
+.google{
+  border: transparent;
+}
+
 .switch__circle--t {
   top: -30%;
   left: 60%;
@@ -249,3 +253,5 @@
     width: 500px;
   }
 }
+
+

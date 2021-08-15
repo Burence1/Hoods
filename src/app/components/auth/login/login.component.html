@@ -4,7 +4,7 @@
       <form class="form" id="b-form" method="" action="">
         <h2 class="form_title title">Sign in to Website</h2>
         <div class="form__icons">
-          <button (click)="googleLogin()">
+          <button (click)="googleLogin()" class="google">
             <img class="form__icon" src="https://img.icons8.com/color/100/000000/google-logo.png" alt=""></button>
         </div><span class="form__span">or use your email account</span>
 
@@ -61,7 +61,7 @@
               </div>
             </div>
           </div>
-          <button mat-raised-button type="submit" [disabled]="!formData.valid" class="auth-btn">
+          <button mat-raised-button type="submit" [disabled]="!formData.valid" class="form__button button submit">
             Sign In <i class="fas fa-sign-in-alt"></i>
           </button>
         </form>
