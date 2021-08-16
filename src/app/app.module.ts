@@ -26,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { HoodComponent } from './components/hood/hood.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { MatInputModule } from '@angular/material/input';
     LoginComponent,
     PasswordResetComponent,
     RegisterComponent,
+    HoodComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +52,7 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     MatInputModule
   ],
-  providers: [AuthService,HoodsService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
