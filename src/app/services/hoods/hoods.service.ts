@@ -25,6 +25,7 @@ export const snapshotToArray = (snapshot: any) => {
 })
 export class HoodsService {
 
+
   user: any;
   username:string;
   occupant:any;
@@ -34,7 +35,7 @@ export class HoodsService {
 
   constructor(private db: AngularFireDatabase,
     private Auth: AngularFireAuth, private router: Router,
-    private snackBar: MatSnackBar,) {
+    private snackBar: MatSnackBar) {
     this.Auth.authState.subscribe(auth => {
       if (auth !== undefined && auth !== null) {
         this.user = auth;
@@ -47,7 +48,7 @@ export class HoodsService {
 
       firebase.database().ref('hoods/').on('value', resp => {
         const hoodData = snapshotToArray(resp);
-        this.hood = hoodData.filter(x => x.occupant === this.username);
+        this.hood = hoodData.filter(x => x.title === this.occupant);
       });
     });
   }

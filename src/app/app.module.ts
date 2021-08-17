@@ -16,6 +16,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { PasswordResetComponent } from './components/auth/password-reset/password-reset.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
+import { HomeComponent } from './components/home/home.component';
 
 // services
 import { AuthService } from './services/auth/auth.service';
@@ -27,6 +28,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { HoodComponent } from './components/hood/hood.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -35,6 +41,7 @@ import { HoodComponent } from './components/hood/hood.component';
     PasswordResetComponent,
     RegisterComponent,
     HoodComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +57,12 @@ import { HoodComponent } from './components/hood/hood.component';
     // Angular material
     MatFormFieldModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
+    MatCardModule,
+    MatSnackBarModule,
+    MatToolbarModule,
+    MatDividerModule,
+    MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]

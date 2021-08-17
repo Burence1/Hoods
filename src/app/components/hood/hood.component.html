@@ -1,1 +1,28 @@
-<p>hood works!</p>
+<div class="example-sidenav-content">
+  <div class="container-fluid">
+    <mat-card>
+      <div class="row">
+        <div class="">
+          <form class="example-form" [formGroup]="hoodForm" (ngSubmit)="newHood(hoodForm.value);hoodForm.reset()">
+            <h2>Please enter new Hood</h2>
+            <div class="new-room">
+              <mat-form-field class="example">
+                <mat-label>Hood Name</mat-label>
+                <input matInput placeholder="Enter hood title" formControlName="title" [errorStateMatcher]="matcher">
+                <mat-error>
+                  <span *ngIf="!hoodForm.get('title').valid && hoodForm.get('title').touched">Enter room
+                    name</span>
+                  <span>Enter room name</span>
+                </mat-error>
+              </mat-form-field>
+              <button color="primary" type="submit" [disabled]="!hoodForm.valid" mat-button matSuffix mat-icon-button
+                aria-label="Send">
+                <mat-icon>send</mat-icon>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>
