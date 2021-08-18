@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import { AngularFireDatabase} from '@angular/fire/database';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -24,19 +24,19 @@ export const snapshotToArray = (snapshot: any) => {
 @Injectable({
   providedIn: 'root'
 })
-export class HoodsService {
+export class BusinessService {
 
   user: any;
-  username:string;
-  occupant:any;
-  hood:any;
-  userData:any;
-  ref:any;
-  img:any;
+  username: string;
+  business: any;
+  userData: any;
+  ref: any;
+  img: any;
+
 
   constructor(private db: AngularFireDatabase,
     private Auth: AngularFireAuth, private router: Router,
-    private snackBar: MatSnackBar,private storage:AngularFireStorage) {
+    private snackBar: MatSnackBar, private storage: AngularFireStorage) {
     this.Auth.authState.subscribe(auth => {
       if (auth !== undefined && auth !== null) {
         this.user = auth;
@@ -44,13 +44,13 @@ export class HoodsService {
       this.getUser().valueChanges().subscribe(res => {
         this.userData = res;
         this.username = this.userData.displayName
-        this.occupant = this.userData.hood;
+        // this.occupant = this.userData.hood;
       });
 
       firebase.database().ref('hoods/').on('value', resp => {
         const hoodData = snapshotToArray(resp);
-        this.hood = hoodData.filter(x => x.title === 'moringa');
-        console.log(this.hood)
+        // this.hood = hoodData.filter(x => x.title === 'moringa');
+        // console.log(this.hood)
       });
     });
   }
@@ -61,13 +61,7 @@ export class HoodsService {
     return this.db.object(path);
   }
 
-  getHood(){
-    const data = this.hood
-    console.log(this.hood)
-    return data
-  }
-
-  addHood(form: any,selectedImage:any) {
+  addBusiness(form: any, selectedImage: any) {
     this.ref = firebase.database().ref('hoods/');
     var name = selectedImage.name;
     const path = `neighborhoods/${name}`
@@ -95,5 +89,4 @@ export class HoodsService {
       })
     ).subscribe();
   }
-
 }
