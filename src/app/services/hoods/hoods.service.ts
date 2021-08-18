@@ -10,11 +10,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 
-export interface Data{
-  name:string;
-  url:string;
-}
-
 export const snapshotToArray = (snapshot: any) => {
   const returnArr: any[] = [];
 
@@ -32,9 +27,6 @@ export const snapshotToArray = (snapshot: any) => {
 })
 export class HoodsService {
 
-  
-  name = '!!!';
-  selectedImage: any = null;
   user: any;
   username:string;
   occupant:any;
@@ -42,13 +34,6 @@ export class HoodsService {
   userData:any;
   ref:any;
   img:any;
-  imageDetailList: AngularFireList<any>;
-  fileList: any[];
-  dataSet: Data = {
-    name: '',
-    url: ''
-  };
-  msg = 'error';
 
   constructor(private db: AngularFireDatabase,
     private Auth: AngularFireAuth, private router: Router,
@@ -115,36 +100,4 @@ export class HoodsService {
     ).subscribe();
   }
 
-  getImageDetailList() {
-    this.imageDetailList = this.db.list('imageDetails');
-  }
-  
-
-  insertImageDetails(name:string, url:string) {
-    this.dataSet = {
-      name,
-      url
-    };
-    this.imageDetailList.push(this.dataSet);
-  }
-
-  getImage(value:any) {
-    this.imageDetailList.snapshotChanges().subscribe(
-      list => {
-        this.fileList = list.map((item:any) => item.payload.val());
-        this.fileList.forEach(element => {
-          if (element.id === value) {
-            this.msg = element.url;
-          }
-        });
-        if (this.msg === 'error') {
-          alert('No record found');
-        }
-        else {
-          window.open(this.msg);
-          this.msg = 'error';
-        }
-      }
-    );
-  }
 }

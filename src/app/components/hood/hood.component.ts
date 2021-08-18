@@ -39,7 +39,6 @@ export class HoodComponent implements OnInit {
       location:[null,Validators.required],
       image:[null,Validators.required],
     });
-    // this.service.getImageDetailList();
   }
 
   newHood(form:any){
@@ -58,9 +57,6 @@ export class HoodComponent implements OnInit {
   showPreview(event: any) {
     this.selectedImage = event.target.files[0];
   }
-  
-  view() {
-    this.service.getImage(this.file);
-  }
+
 
 }
