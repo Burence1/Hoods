@@ -22,22 +22,29 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 
 export class HoodComponent implements OnInit {
 
-  title:'';
+  
   hoodForm: FormGroup
   matcher = new MyErrorStateMatcher();
+  imageInput: string;
+  selectedImage: any = null;
+  file:string;
 
   constructor(private service:HoodsService,
     private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.hoodForm = this.formBuilder.group({
-      title: [null, Validators.required]
+      title: [null, Validators.required],
+      description: [null, Validators.required],
+      location:[null,Validators.required],
+      image:[null,Validators.required],
     });
+    // this.service.getImageDetailList();
   }
 
   newHood(form:any){
     const data = form
-    this.service.addHood(data)
+    this.service.addHood(data,this.selectedImage)
   }
 
   getHood(){
@@ -46,6 +53,14 @@ export class HoodComponent implements OnInit {
 
   currentUser(){
     this.service.getUser()
+  }
+
+  showPreview(event: any) {
+    this.selectedImage = event.target.files[0];
+  }
+  
+  view() {
+    this.service.getImage(this.file);
   }
 
 }

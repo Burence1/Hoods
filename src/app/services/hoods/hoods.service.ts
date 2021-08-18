@@ -7,6 +7,13 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angula
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { finalize } from 'rxjs/operators';
+
+export interface Data{
+  name:string;
+  url:string;
+}
 
 export const snapshotToArray = (snapshot: any) => {
   const returnArr: any[] = [];
@@ -25,17 +32,27 @@ export const snapshotToArray = (snapshot: any) => {
 })
 export class HoodsService {
 
-
+  
+  name = '!!!';
+  selectedImage: any = null;
   user: any;
   username:string;
   occupant:any;
   hood:any;
   userData:any;
   ref:any;
+  img:any;
+  imageDetailList: AngularFireList<any>;
+  fileList: any[];
+  dataSet: Data = {
+    name: '',
+    url: ''
+  };
+  msg = 'error';
 
   constructor(private db: AngularFireDatabase,
     private Auth: AngularFireAuth, private router: Router,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,private storage:AngularFireStorage) {
     this.Auth.authState.subscribe(auth => {
       if (auth !== undefined && auth !== null) {
         this.user = auth;
@@ -48,7 +65,8 @@ export class HoodsService {
 
       firebase.database().ref('hoods/').on('value', resp => {
         const hoodData = snapshotToArray(resp);
-        this.hood = hoodData.filter(x => x.title === this.occupant);
+        this.hood = hoodData.filter(x => x.title === 'moringa');
+        console.log(this.hood)
       });
     });
   }
@@ -60,22 +78,73 @@ export class HoodsService {
   }
 
   getHood(){
-    return this.hood
+    const data = this.hood
+    console.log(this.hood)
+    return data
   }
 
-  addHood(form: any) {
+  addHood(form: any,selectedImage:any) {
     this.ref = firebase.database().ref('hoods/');
-    const hood = form;
-    hood.admin = this.username;
-    this.ref.orderByChild('title').equalTo(hood.title).once('value', (snapshot: any) => {
-      if (snapshot.exists()) {
-        this.snackBar.open('Hood already exist!', 'undo', {
-          duration: 2000
+    
+    const title = form.title
+    var name = selectedImage.name;
+    const path = `neighborhoods/${name}`
+    const fileRef = this.storage.ref(path);
+    this.storage.upload(path, selectedImage).snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe((url) => {
+
+          const hood = form;
+          hood.admin = this.username;
+          this.img = url;
+          hood.image = this.img
+          console.log(hood.image)
+
+          this.ref.orderByChild('title').equalTo(hood.title).once('value', (snapshot: any) => {
+            if (snapshot.exists()) {
+              this.snackBar.open('Hood already exist!', 'undo', {
+                duration: 2000
+              });
+            } else {
+              const newHood = firebase.database().ref('hoods/').push();
+              newHood.set(hood);
+            }
+          });
+        })
+      })
+    ).subscribe();
+  }
+
+  getImageDetailList() {
+    this.imageDetailList = this.db.list('imageDetails');
+  }
+  
+
+  insertImageDetails(name:string, url:string) {
+    this.dataSet = {
+      name,
+      url
+    };
+    this.imageDetailList.push(this.dataSet);
+  }
+
+  getImage(value:any) {
+    this.imageDetailList.snapshotChanges().subscribe(
+      list => {
+        this.fileList = list.map((item:any) => item.payload.val());
+        this.fileList.forEach(element => {
+          if (element.id === value) {
+            this.msg = element.url;
+          }
         });
-      } else {
-        const newHood = firebase.database().ref('hoods/').push();
-        newHood.set(hood);
+        if (this.msg === 'error') {
+          alert('No record found');
+        }
+        else {
+          window.open(this.msg);
+          this.msg = 'error';
+        }
       }
-    });
+    );
   }
 }

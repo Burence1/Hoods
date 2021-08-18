@@ -15,6 +15,32 @@
                   <span>Enter room name</span>
                 </mat-error>
               </mat-form-field>
+              <br>
+              <mat-form-field class="example">
+                <mat-label>Description</mat-label>
+                <input matInput placeholder="Enter Description" formControlName="description" [errorStateMatcher]="matcher">
+                <mat-error>
+                  <span *ngIf="!hoodForm.get('description').valid && hoodForm.get('description').touched">Enter Description
+                    </span>
+                  <span>Enter Description</span>
+                </mat-error>
+              </mat-form-field>
+              
+
+              <!-- <mat-form-field class="example"> -->
+                <mat-label>Image</mat-label>
+                <input type="file" placeholder="Enter Image" formControlName="image" (change)="showPreview($event)">
+              <!-- </mat-form-field> -->
+              <br>
+              <mat-form-field class="example">
+                <mat-label>Location</mat-label>
+                <input matInput placeholder="Enter Location" formControlName="location" [errorStateMatcher]="matcher">
+                <mat-error>
+                  <span *ngIf="!hoodForm.get('location').valid && hoodForm.get('location').touched">Enter Location
+                  </span>
+                  <span>Enter Location</span>
+                </mat-error>
+              </mat-form-field>
               <button color="primary" type="submit" [disabled]="!hoodForm.valid" mat-button matSuffix mat-icon-button
                 aria-label="Send">
                 <mat-icon>send</mat-icon>

@@ -33,6 +33,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatCarouselModule } from 'ng-mat-carousel';
+import { MatTabsModule } from '@angular/material/tabs';
+
 
 @NgModule({
   declarations: [
@@ -62,7 +69,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatSnackBarModule,
     MatToolbarModule,
     MatDividerModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatBadgeModule,
+    MatButtonModule,
+    MatCarouselModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
