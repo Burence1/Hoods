@@ -19,6 +19,12 @@ export class AuthService {
 
   constructor(private db:AngularFireDatabase,private router:Router,private afAuth:AngularFireAuth) { 
     this.user$ = afAuth.authState;
+    console.log(this.user$)
+  }
+
+  fetchProfileApi(id: string): Observable<any> {
+    const path = `users/${id}`;
+    return this.db.object<any>(path).valueChanges();
   }
 
   authUser() {
@@ -67,21 +73,6 @@ export class AuthService {
       .catch(error => console.log(error));
   }
 
-  // email signup/login
-  // googleLogin() {
-  //   const provider = new firebase.auth.GoogleAuthProvider();
-  //   return this.oAuthLogin(provider)
-  //     .then((value: firebase.auth.UserCredential) => {
-  //       console.log('Success', value), this.router.navigateByUrl('/home');
-  //       const currentId = value.user.uid;
-  //       this.setUserData(value.user.email, value.user.displayName, currentId);
-  //     })
-  //     .catch((error: any) => {
-  //       console.log('Something went wrong: ', error);
-  //     });
-  // }
-
-  // reset password logic
   resetPassword(email: string) {
     return firebase
       .auth()
