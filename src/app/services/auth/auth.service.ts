@@ -41,13 +41,13 @@ export class AuthService {
       });
   }
 
-  emailSignup(displayName: string, email: string, password: string, confirmPassword: string) {
+  emailSignup(displayName: string, email: string, password: string, confirmPassword: string,hood:string) {
     this.afAuth.createUserWithEmailAndPassword(email, password)
       .then(async (user: firebase.auth.UserCredential) => {
         await firebase.auth().currentUser.sendEmailVerification();
         this.authState = user;
         const currentId = this.authState.user.uid;
-        this.setUserData(email, displayName, currentId);
+        this.setUserData(email, displayName, currentId,hood);
         this.router.navigateByUrl('/login');
       })
       .catch((error: any) => {
@@ -56,29 +56,30 @@ export class AuthService {
   }
 
   // move user data to real-time database
-  setUserData(email: string, displayName: string, currentId: any): void {
+  setUserData(email: string, displayName: string, currentId: any,hood:string): void {
     const path = `users/${currentId}`;
     const data = {
       email,
       displayName,
+      hood,
     };
     this.db.object(path).update(data)
       .catch(error => console.log(error));
   }
 
   // email signup/login
-  googleLogin() {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    return this.oAuthLogin(provider)
-      .then((value: firebase.auth.UserCredential) => {
-        console.log('Success', value), this.router.navigateByUrl('/home');
-        const currentId = value.user.uid;
-        this.setUserData(value.user.email, value.user.displayName, currentId);
-      })
-      .catch((error: any) => {
-        console.log('Something went wrong: ', error);
-      });
-  }
+  // googleLogin() {
+  //   const provider = new firebase.auth.GoogleAuthProvider();
+  //   return this.oAuthLogin(provider)
+  //     .then((value: firebase.auth.UserCredential) => {
+  //       console.log('Success', value), this.router.navigateByUrl('/home');
+  //       const currentId = value.user.uid;
+  //       this.setUserData(value.user.email, value.user.displayName, currentId);
+  //     })
+  //     .catch((error: any) => {
+  //       console.log('Something went wrong: ', error);
+  //     });
+  // }
 
   // reset password logic
   resetPassword(email: string) {

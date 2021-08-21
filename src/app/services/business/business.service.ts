@@ -32,6 +32,7 @@ export class BusinessService {
   userData: any;
   ref: any;
   img: any;
+  hoods:any[];
 
 
   constructor(private db: AngularFireDatabase,
@@ -61,6 +62,7 @@ export class BusinessService {
     return this.db.object(path);
   }
 
+  
   addBusiness(form: any, selectedImage: any) {
     this.ref = firebase.database().ref('hoods/');
     var name = selectedImage.name;

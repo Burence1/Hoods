@@ -33,6 +33,7 @@ export class HoodsService {
   userData:any;
   ref:any;
   img:any;
+  hoods: any[];
 
   constructor(private db: AngularFireDatabase,
     private Auth: AngularFireAuth, private router: Router,
@@ -96,4 +97,10 @@ export class HoodsService {
     ).subscribe();
   }
 
+  getHoods() {
+    return firebase.database().ref('hoods/').once("value", snap => {
+      this.hoods = snapshotToArray(snap)
+      console.log(this.hoods)
+    })
+  }
 }

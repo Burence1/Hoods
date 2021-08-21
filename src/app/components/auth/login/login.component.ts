@@ -23,9 +23,9 @@ export class LoginComponent implements OnInit {
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
 
-  googleLogin(){
-    this.auth.googleLogin();
-  }
+  // googleLogin(){
+  //   this.auth.googleLogin();
+  // }
 
   emailLogin(formData:any){
     if (formData.valid) {

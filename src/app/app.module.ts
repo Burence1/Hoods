@@ -17,6 +17,7 @@ import { PasswordResetComponent } from './components/auth/password-reset/passwor
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { HomeComponent } from './components/home/home.component';
+import { BusinessComponent } from './components/business/business.component';
 
 // services
 import { AuthService } from './services/auth/auth.service';
@@ -39,6 +40,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCarouselModule } from 'ng-mat-carousel';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatListModule } from '@angular/material/list';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -49,6 +53,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     RegisterComponent,
     HoodComponent,
     HomeComponent,
+    BusinessComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,6 +78,10 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatBadgeModule,
     MatButtonModule,
     MatCarouselModule.forRoot(),
+    MatListModule,
+    MatDialogModule,
+    MatSelectModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

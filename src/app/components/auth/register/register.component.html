@@ -3,12 +3,7 @@
     <div class="container a-container" id="a-container">
       <form class="form" id="a-form" method="" action="">
         <h2 class="form_title title">Create Account</h2>
-        <div class="form__icons">
-          <img class="form__icon" src="https://img.icons8.com/color/100/000000/google-logo.png" alt="">
-        </div><span class="form__span">or use email for registration</span>
         <form #formData="ngForm" (ngSubmit)="onRegister(formData)" class="">
-          <h3 class="text-center"><strong>Register</strong></h3>
-          <hr>
           <table>
             <tr>
               <td>
@@ -65,8 +60,8 @@
                     id="password" name="password" (input)="confirmPassword.control.updateValueAndValidity()"
                     #password="ngModel" required
                     pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$" maxlength="20" />
-                  <span class="hide" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                    [attr.aria-pressed]="hide">
+                  <span class="hide" mat-icon-button matSuffix (click)="hide = !hide"
+                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                     <mat-icon>{{
                       hide ? "visibility_off" : "visibility"
                       }}</mat-icon>
@@ -91,8 +86,8 @@
                     (ngModel)="(confirmPassword)" id="confirmPassword" name="confirmPassword" #confirmPassword="ngModel"
                     appConfirmEqualValidator="password" required
                     pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$" maxlength="20" />
-                  <span class="hide" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                    [attr.aria-pressed]="hide">
+                  <span class="hide" mat-icon-button matSuffix (click)="hide = !hide"
+                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                     <mat-icon>{{
                       hide ? "visibility_off" : "visibility"
                       }}</mat-icon>
@@ -106,6 +101,21 @@
                     Passwords must match.
                   </div>
                 </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="hood" class="form-label">Select hood</label> <br />
+                <mat-form-field appearance="outline">
+                  <mat-label>Select your hood</mat-label>
+                  <input matInput placeholder="hood" (ngModel)="(hood)" id="hood" name="hood" #hood="ngModel" required
+                    />
+                    <mat-select (ngModel)="(hood)" name="hood" #hood="ngModel">
+                      <mat-option *ngFor="let x of hoods" [value]="x">
+                        {{x?.title}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
               </td>
             </tr>
             <button mat-raised-button type="submit" [disabled]="!formData.valid" class="form__button button submit">
@@ -127,3 +137,13 @@
     </div>
   </div>
 </div>
+
+<!-- <ng-template #list>
+  <mat-list role="list" cdk-virtual-scroll-viewport itemSize="10" *ngIf="hoods">
+    <mat-list-item role="listitem" *ngFor="let x of hoods">
+      <div>
+        {{ x?.title}}
+      </div>
+    </mat-list-item>
+  </mat-list>
+</ng-template> -->
