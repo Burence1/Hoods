@@ -1,1 +1,12 @@
-<router-outlet></router-outlet>
+<mat-drawer-container>
+  <mat-drawer mode="side" [opened]="sideBarOpen">
+    <!-- <mat-drawer mode="side" opened="true"> -->
+    <app-sidenav></app-sidenav>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div class="d-flex page__box">
+      <app-nav (toggleSidebarForMe)="sideBarToggler()"></app-nav>
+    </div>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

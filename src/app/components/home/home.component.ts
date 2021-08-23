@@ -37,6 +37,12 @@ export class HomeComponent implements OnInit {
   chatname:any
   myHood:any
   data:any
+
+  sideBarOpen = false;
+
+  sideBarToggler() {
+    this.sideBarOpen = !this.sideBarOpen;
+  }
   
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -70,6 +76,7 @@ export class HomeComponent implements OnInit {
     })
     
   }
+
 
   getUser() {
     const userId = this.user.uid;

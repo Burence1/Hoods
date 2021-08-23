@@ -43,6 +43,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { NavComponent } from './components/nav/nav.component';
 
 
 @NgModule({
@@ -54,6 +57,8 @@ import { MatSelectModule } from '@angular/material/select';
     HoodComponent,
     HomeComponent,
     BusinessComponent,
+    SidenavComponent,
+    NavComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,6 +86,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatListModule,
     MatDialogModule,
     MatSelectModule,
+    MatMenuModule,
 
   ],
   providers: [],
