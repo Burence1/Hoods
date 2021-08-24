@@ -33,13 +33,13 @@
   
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <div class="row" *ngFor="let data of this.hood">
+                <div class="row" id="hoodData" *ngFor="let data of this.hood">
   
                   <div class="col-md-4 col-lg-4">
                     <div class="card shadow">
                       <img class="img-fluid" alt="" [src]="data.image">
                       <div class="card-body">
-                        <h2 class="card-title"> <strong>Connect with Professionals</strong> </h2>
+                        <h2 class="card-title"><strong>Neighborhood Businesses</strong> </h2>
                         <hr>
                         <p class="card-text">We connect you to many professionals around Kenya</p>
                         <a class="btn btn-lg view" href="/directory"> View </a>
@@ -51,7 +51,7 @@
                     <div class="card shadow">
                       <img class="img-fluid" alt="" [src]="data.image">
                       <div class="card-body">
-                        <h2 class="card-title"> <strong>Chat with Colleagues</strong> </h2>
+                        <h2 class="card-title"> <strong>Hood Chat Group</strong> </h2>
                         <hr>
                         <p class="card-text">With our new supporting chat feature you can reach out when in need.</p>
                         <a class="btn btn-lg view" href="/chats"> View </a>
@@ -63,7 +63,7 @@
                     <div class="card shadow">
                       <img class="img-fluid" alt="100%x280" [src]="data.image">
                       <div class="card-body">
-                        <h2 class="card-title"> <strong>Need help?</strong> </h2>
+                        <h2 class="card-title"> <strong>Posts</strong> </h2>
                         <hr>
                         <p class="card-text">See our help section on how to go through the app</p>
                         <a class="btn btn-lg view" href="/about"> View </a>

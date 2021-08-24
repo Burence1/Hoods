@@ -3,6 +3,10 @@
 	object-fit: contain;
 }
 
+#hoodData{
+	color: black;
+}
+
 .avatar{
 	margin-bottom: 0%;
 	height: 2em;

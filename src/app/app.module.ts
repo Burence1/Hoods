@@ -18,6 +18,8 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { BusinessComponent } from './components/business/business.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { NavComponent } from './components/nav/nav.component';
 
 // services
 import { AuthService } from './services/auth/auth.service';
@@ -44,8 +46,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
-import { SidenavComponent } from './components/sidenav/sidenav.component';
-import { NavComponent } from './components/nav/nav.component';
+import { CategoryComponent } from './components/category/category.component';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { NavComponent } from './components/nav/nav.component';
     BusinessComponent,
     SidenavComponent,
     NavComponent,
+    CategoryComponent,
   ],
   imports: [
     BrowserModule,

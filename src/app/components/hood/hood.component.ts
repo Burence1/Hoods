@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -13,6 +14,17 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 
+export const snapshotToArray = (snapshot: any) => {
+  const returnArr: any[] = [];
+
+  snapshot.forEach((childSnapshot: any) => {
+    const item = childSnapshot.val();
+    item.key = childSnapshot.key;
+    returnArr.push(item);
+  });
+
+  return returnArr;
+};
 
 @Component({
   selector: 'app-hood',
@@ -28,9 +40,17 @@ export class HoodComponent implements OnInit {
   imageInput: string;
   selectedImage: any = null;
   file:string;
+  allHoods:any[];
 
   constructor(private service:HoodsService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder) {
+
+    firebase.database().ref('hoods/').on('value', resp => {
+      const hoodData = snapshotToArray(resp);
+      this.allHoods = hoodData
+      console.log(this.allHoods)
+    });
+     }
 
   ngOnInit(): void {
     this.hoodForm = this.formBuilder.group({

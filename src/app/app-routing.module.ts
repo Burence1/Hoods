@@ -1,3 +1,4 @@
+import { CategoryComponent } from './components/category/category.component';
 import { HomeComponent } from './components/home/home.component';
 import { HoodComponent } from './components/hood/hood.component';
 import { PasswordResetComponent } from './components/auth/password-reset/password-reset.component';
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path:'reset',component:PasswordResetComponent},
   {path:'hood',component:HoodComponent},
   {path:'home',component:HomeComponent},
+  {path:'category',component:CategoryComponent},
 ];
 
 @NgModule({

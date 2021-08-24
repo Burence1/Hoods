@@ -1,3 +1,49 @@
+<!-- <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" role="button">
+<div class="card addHood  m-5">
+    <img src="https://img.icons8.com/dotty/80/000000/add.png" class="icon" />
+</div></a> -->
+
+
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button> -->
+<section class="container">
+  <div class="row active-with-click mt-5">
+    <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let hood of this.allHoods">
+      <article class="material-card Blue-Grey">
+        <h2>
+          <span>{{hood.title}}</span>
+          <strong>
+            <i class="fa fa-fw fa-star"></i>
+            {{hood.location}}
+          </strong>
+        </h2>
+        <div class="mc-content">
+          <div class="img-container">
+            <img class="img-responsive" [src]="hood.image">
+          </div>
+          <div class="mc-description">
+            Freeman has received Academy Award nominations for his performances in Street Smart, Driving Miss Daisy, The
+            Shawshank Redemption and Invictus ...
+          </div>
+        </div>
+        <a class="mc-btn-action">
+          <i class="fa fa-bars"></i>
+        </a>
+        <div class="mc-footer">
+          <h4>
+            Social
+          </h4>
+          <a class="fa fa-fw fa-facebook"></a>
+          <a class="fa fa-fw fa-twitter"></a>
+          <a class="fa fa-fw fa-linkedin"></a>
+          <a class="fa fa-fw fa-google-plus"></a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <div class="example-sidenav-content">
   <div class="container-fluid">
     <mat-card>
@@ -18,18 +64,20 @@
               <br>
               <mat-form-field class="example">
                 <mat-label>Description</mat-label>
-                <input matInput placeholder="Enter Description" formControlName="description" [errorStateMatcher]="matcher">
+                <input matInput placeholder="Enter Description" formControlName="description"
+                  [errorStateMatcher]="matcher">
                 <mat-error>
-                  <span *ngIf="!hoodForm.get('description').valid && hoodForm.get('description').touched">Enter Description
-                    </span>
+                  <span *ngIf="!hoodForm.get('description').valid && hoodForm.get('description').touched">Enter
+                    Description
+                  </span>
                   <span>Enter Description</span>
                 </mat-error>
               </mat-form-field>
-              
+
 
               <!-- <mat-form-field class="example"> -->
-                <mat-label>Image</mat-label>
-                <input type="file" placeholder="Enter Image" formControlName="image" (change)="showPreview($event)">
+              <mat-label>Image</mat-label>
+              <input type="file" placeholder="Enter Image" formControlName="image" (change)="showPreview($event)">
               <!-- </mat-form-field> -->
               <br>
               <mat-form-field class="example">
@@ -50,5 +98,26 @@
         </div>
       </div>
     </mat-card>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  data-backdrop="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
   </div>
 </div>
