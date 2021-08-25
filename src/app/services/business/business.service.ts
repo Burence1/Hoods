@@ -33,6 +33,10 @@ export class BusinessService {
   ref: any;
   img: any;
   hoods:any[];
+  userHood:any;
+  data: any
+  userName:any;
+  chatname:string
 
 
   constructor(private db: AngularFireDatabase,
@@ -43,15 +47,10 @@ export class BusinessService {
         this.user = auth;
       }
       this.getUser().valueChanges().subscribe(res => {
-        this.userData = res;
-        this.username = this.userData.displayName
-        // this.occupant = this.userData.hood;
-      });
-
-      firebase.database().ref('hoods/').on('value', resp => {
-        const hoodData = snapshotToArray(resp);
-        // this.hood = hoodData.filter(x => x.title === 'moringa');
-        // console.log(this.hood)
+        this.userName = res;
+        this.data = this.userName.hood
+        console.log(this.data)
+        this.chatname = this.userName.displayName;
       });
     });
   }
@@ -64,27 +63,57 @@ export class BusinessService {
 
   
   addBusiness(form: any, selectedImage: any) {
-    this.ref = firebase.database().ref('hoods/');
+    this.ref = firebase.database().ref('business/');
     var name = selectedImage.name;
-    const path = `neighborhoods/${name}`
+    const path = `businesses/${name}`
     const fileRef = this.storage.ref(path);
     this.storage.upload(path, selectedImage).snapshotChanges().pipe(
       finalize(() => {
         fileRef.getDownloadURL().subscribe((url) => {
-          const hood = form;
-          hood.admin = this.username;
+          const business = form;
+          business.owner = this.chatname;
+          business.hood = this.data;
+          console.log(business.hood)
           this.img = url;
-          hood.image = this.img
-          console.log(hood.image)
+          business.image = this.img
+          console.log(business.image)
 
-          this.ref.orderByChild('title').equalTo(hood.title).once('value', (snapshot: any) => {
+          this.ref.orderByChild('title').equalTo(business.title).once('value', (snapshot: any) => {
             if (snapshot.exists()) {
-              this.snackBar.open('Hood already exist!', 'undo', {
+              this.snackBar.open('Business already exist!', 'undo', {
                 duration: 2000
               });
             } else {
-              const newHood = firebase.database().ref('hoods/').push();
-              newHood.set(hood);
+              const newHood = firebase.database().ref('business/').push();
+              newHood.set(business);
+            }
+          });
+        })
+      })
+    ).subscribe();
+  }
+
+  addCategory(form: any, selectedImage: any) {
+    this.ref = firebase.database().ref('categories/');
+    var name = selectedImage.name;
+    const path = `categories/${name}`
+    const fileRef = this.storage.ref(path);
+    this.storage.upload(path, selectedImage).snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe((url) => {
+          const business = form;
+          this.img = url;
+          business.image = this.img
+          console.log(business.image)
+
+          this.ref.orderByChild('title').equalTo(business.title).once('value', (snapshot: any) => {
+            if (snapshot.exists()) {
+              this.snackBar.open('Category already exist!', 'undo', {
+                duration: 2000
+              });
+            } else {
+              const newHood = firebase.database().ref('categories/').push();
+              newHood.set(business);
             }
           });
         })

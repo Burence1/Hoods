@@ -6,6 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -34,49 +36,71 @@ export const snapshotToArray = (snapshot: any) => {
 
 export class HoodComponent implements OnInit {
 
-  
+
   hoodForm: FormGroup
   matcher = new MyErrorStateMatcher();
   imageInput: string;
   selectedImage: any = null;
-  file:string;
-  allHoods:any[];
+  file: string;
+  allHoods: any[];
+  userName: any
+  chatname: any
+  data: any
+  user: any;
+  userHood: any;
 
-  constructor(private service:HoodsService,
+  constructor(private Auth: AngularFireAuth, private db: AngularFireDatabase, private service: HoodsService,
     private formBuilder: FormBuilder) {
+    this.Auth.authState.subscribe(auth => {
+      if (auth !== undefined && auth !== null) {
+        this.user = auth;
+      }
+      this.getUser().valueChanges().subscribe(a => {
+        this.userName = a;
+        this.data = this.userName.hood
+        console.log(this.data)
+        this.chatname = this.userName.displayName;
 
-    firebase.database().ref('hoods/').on('value', resp => {
-      const hoodData = snapshotToArray(resp);
-      this.allHoods = hoodData
-      console.log(this.allHoods)
+        firebase.database().ref('hoods/').on('value', resp => {
+          const hoodData = snapshotToArray(resp);
+          this.userHood = hoodData.filter(x => x.title === this.data);
+          console.log(this.userHood)
+          this.allHoods = hoodData
+          console.log(this.allHoods)
+        });
+      });
     });
-     }
+  }
 
   ngOnInit(): void {
     this.hoodForm = this.formBuilder.group({
       title: [null, Validators.required],
       description: [null, Validators.required],
-      location:[null,Validators.required],
-      image:[null,Validators.required],
+      location: [null, Validators.required],
+      image: [null, Validators.required],
     });
   }
 
-  newHood(form:any){
-    const data = form
-    this.service.addHood(data,this.selectedImage)
+  getUser() {
+    const userId = this.user.uid;
+    const path = `/users/${userId}`;
+    return this.db.object(path);
   }
 
-  getHood(){
+  newHood(form: any) {
+    const data = form
+    this.service.addHood(data, this.selectedImage)
+  }
+
+  getHood() {
     this.service.getHood()
   }
 
-  currentUser(){
+  currentUser() {
     this.service.getUser()
   }
 
   showPreview(event: any) {
     this.selectedImage = event.target.files[0];
   }
-
-
 }
