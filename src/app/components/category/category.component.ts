@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -30,11 +31,9 @@ export class CategoryComponent implements OnInit {
 
   allCategories:any[];
 
-  constructor(private db: AngularFireDatabase) {
+  constructor(private db: AngularFireDatabase,private route:Router) {
     firebase.database().ref('categories/').on('value', resp => {
       const hoodData = snapshotToArray(resp);
-      // this.userHood = hoodData.filter(x => x.title === this.data);
-      // console.log(this.userHood)
       this.allCategories = hoodData
       console.log(this.allCategories)
     });
@@ -44,7 +43,7 @@ export class CategoryComponent implements OnInit {
   }
 
   categoryBusinesses(businesses:string){
-    console.log(businesses)
+    this.route.navigate(['/business',businesses]);
   }
 
 }

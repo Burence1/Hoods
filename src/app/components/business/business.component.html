@@ -1,6 +1,6 @@
 <section class="container">
   <div class="row active-with-click mt-5">
-    <div class="col-md-4 col-sm-6 col-xs-12">
+    <!-- <div class="col-md-4 col-sm-6 col-xs-12">
       <article class="material-card Blue-Grey">
         <div class="mc-content">
           <div class="img-container">
@@ -13,7 +13,7 @@
           </div>
         </div>
       </article>
-    </div>
+    </div> -->
 
     <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let hood of this.businessHood">
       <article class="material-card Blue-Grey">
@@ -57,7 +57,7 @@
         <div class="">
           <form class="example-form" [formGroup]="businessForm"
             (ngSubmit)="newBusiness(businessForm.value);businessForm.reset()">
-            <h2>Please enter new Hood</h2>
+            <h2>Please enter new Business</h2>
             <div class="new-room">
               <mat-form-field class="example">
                 <mat-label>Business Name</mat-label>
@@ -80,11 +80,12 @@
                   <span>Enter Description</span>
                 </mat-error>
               </mat-form-field>
+              <br>
 
-              <!-- <mat-form-field class="example"> -->
+              
               <mat-label>Image</mat-label>
               <input type="file" placeholder="Enter Image" formControlName="image" (change)="showPreview($event)">
-              <!-- </mat-form-field> -->
+             
               <br>
               <mat-form-field class="example">
                 <mat-label>Location</mat-label>
@@ -95,6 +96,17 @@
                   </span>
                   <span>Enter Location</span>
                 </mat-error>
+              </mat-form-field>
+
+              <br>
+              <mat-form-field class="example">
+                <mat-label>Select category</mat-label>
+                <input matInput placeholder="category" formControlName="category" [errorStateMatcher]="matcher"/>
+                <mat-select formControlName="category">
+                  <mat-option *ngFor="let x of businesses" [value]="x.title">
+                    {{x?.title}}
+                  </mat-option>
+                </mat-select>
               </mat-form-field>
               <button color="primary" type="submit" [disabled]="!businessForm.valid" mat-button matSuffix
                 mat-icon-button aria-label="Send">
@@ -109,7 +121,7 @@
 </div>
 
 
-<div class="example-sidenav-content">
+<!-- <div class="example-sidenav-content">
   <div class="container-fluid">
     <mat-card>
       <div class="row">
@@ -128,10 +140,10 @@
                 </mat-error>
               </mat-form-field>
               <br>
-              <!-- <mat-form-field class="example"> -->
+              
               <mat-label>Image</mat-label>
               <input type="file" placeholder="Enter Image" formControlName="image" (change)="showPreview($event)">
-              <!-- </mat-form-field> -->
+              
 
               <button color="primary" type="submit" [disabled]="!categoryForm.valid" mat-button matSuffix
                 mat-icon-button aria-label="Send">
@@ -143,4 +155,4 @@
       </div>
     </mat-card>
   </div>
-</div>
+</div> -->

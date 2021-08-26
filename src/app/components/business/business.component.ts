@@ -8,6 +8,7 @@ import 'firebase/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { BusinessService } from 'src/app/services/business/business.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -46,10 +47,13 @@ export class BusinessComponent implements OnInit {
   chatname: any
   data: any
   user: any;
-  businessHood: any;
+  businessHood: any[];
+  businessCategory:string;
+  businesses: Array<any>;
+  filterData:any;
 
   constructor(private Auth: AngularFireAuth, private db: AngularFireDatabase, private service: BusinessService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,private route:ActivatedRoute) {
     this.Auth.authState.subscribe(auth => {
       if (auth !== undefined && auth !== null) {
         this.user = auth;
@@ -60,15 +64,27 @@ export class BusinessComponent implements OnInit {
         console.log(this.data)
         this.chatname = this.userName.displayName;
 
+        this.businessCategory = this.route.snapshot.params.businesses;
+        console.log(this.businessCategory)
         firebase.database().ref('business/').on('value', resp => {
           const businessData = snapshotToArray(resp);
-          this.businessHood = businessData.filter(x => x.hood === this.data);
-          console.log(this.businessHood)
+          this.businessHood = businessData.filter(x => x.hood === this.data && x.category === this.businessCategory);
+
+          // this.filterData = this.businessHood.filter(x => x.category === this.businessCategory);
+          // console.log(this.businessHood)
+          // console.log(this.filterData)
           this.allBusiness = businessData
           console.log(this.allBusiness)
         });
       });
     });
+  }
+
+  getCategory() {
+    return firebase.database().ref('categories/').once("value", snap => {
+      this.businesses = snapshotToArray(snap)
+      console.log(this.businesses)
+    })
   }
 
   getUser() {
@@ -94,12 +110,15 @@ export class BusinessComponent implements OnInit {
       description: [null, Validators.required],
       location: [null, Validators.required],
       image: [null, Validators.required],
+      category: [null, Validators.required],
     });
 
     this.categoryForm = this.formBuilder.group({
       title: [null, Validators.required],
       image: [null, Validators.required],
     });
+
+    this.getCategory()
   }
 
   showPreview(event: any) {

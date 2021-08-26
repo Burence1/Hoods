@@ -1,21 +1,68 @@
-<section class="container">
-  <div class="row active-with-click mt-5">
-    <div class="col-md-4 col-sm-6 col-xs-12">
-      <article class="material-card Blue-Grey">
-        <div class="mc-content">
-          <div class="img-container">
-            <a data-bs-toggle="modal" data-bs-target="#exampleModal" role="button">
-              <div class="card addHood  m-5">
-                <img src="https://img.icons8.com/dotty/80/000000/add.png" class="icon" />
-                <span>Add Hood</span>
+<div class="container-fluid page">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+      <div class="page__content shadow position-relative d-flex">
+        <div class="row">
+          <div class="col-md-7">
+            <div class="image">
+              <img src="../../../assets/images/add.jpg" alt="logo" class="img">
+            </div>
+          </div>
+          <div class="desc col-md-5">
+            <form class="example-form" [formGroup]="hoodForm" (ngSubmit)="newHood(hoodForm.value);hoodForm.reset()">
+              <h2><strong>Add neighborhood</strong></h2>
+              <div class="new-room">
+                <mat-form-field class="example">
+                  <mat-label>Hood Name</mat-label>
+                  <input matInput placeholder="Enter hood title" formControlName="title" [errorStateMatcher]="matcher">
+                  <mat-error>
+                    <span *ngIf="!hoodForm.get('title').valid && hoodForm.get('title').touched">Enter room
+                      name</span>
+                    <span>Enter room name</span>
+                  </mat-error>
+                </mat-form-field>
+                <br>
+                <mat-form-field class="example">
+                  <mat-label>Description</mat-label>
+                  <textarea matInput placeholder="Enter Description" formControlName="description" [errorStateMatcher]="matcher"></textarea>
+                  <mat-error>
+                    <span *ngIf="!hoodForm.get('description').valid && hoodForm.get('description').touched">Enter
+                      Description
+                    </span>
+                    <span>Enter Description</span>
+                  </mat-error>
+                </mat-form-field>
+            
+                <!-- <mat-label>Image</mat-label> -->
+                <input type="file" placeholder="Enter Image" formControlName="image" (change)="showPreview($event)">
+            
+                <br>
+                <mat-form-field class="example">
+                  <mat-label>Location</mat-label>
+                  <input matInput placeholder="Enter Location" formControlName="location" [errorStateMatcher]="matcher">
+                  <mat-error>
+                    <span *ngIf="!hoodForm.get('location').valid && hoodForm.get('location').touched">Enter Location
+                    </span>
+                    <span>Enter Location</span>
+                  </mat-error>
+                </mat-form-field>
+                <button color="primary" type="submit" [disabled]="!hoodForm.valid" mat-button matSuffix mat-icon-button
+                  aria-label="Send">
+                  <mat-icon>send</mat-icon>
+                </button>
               </div>
-            </a>
+            </form>
           </div>
         </div>
-      </article>
+      </div>
     </div>
+    <div class="col-md-1"></div>
+  </div>
 
-    <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let hood of this.allHoods">
+<section class="container">
+  <div class="row active-with-click mt-5">
+    <div class="col-md-3 col-sm-6 col-xs-12" *ngFor="let hood of this.allHoods">
       <article class="material-card Blue-Grey">
         <h2>
           <span>{{hood.title}}</span>
@@ -49,81 +96,3 @@
     </div>
   </div>
 </section>
-
-<div class="example-sidenav-content">
-  <div class="container-fluid">
-    <mat-card>
-      <div class="row">
-        <div class="">
-          <form class="example-form" [formGroup]="hoodForm" (ngSubmit)="newHood(hoodForm.value);hoodForm.reset()">
-            <h2>Please enter new Hood</h2>
-            <div class="new-room">
-              <mat-form-field class="example">
-                <mat-label>Hood Name</mat-label>
-                <input matInput placeholder="Enter hood title" formControlName="title" [errorStateMatcher]="matcher">
-                <mat-error>
-                  <span *ngIf="!hoodForm.get('title').valid && hoodForm.get('title').touched">Enter room
-                    name</span>
-                  <span>Enter room name</span>
-                </mat-error>
-              </mat-form-field>
-              <br>
-              <mat-form-field class="example">
-                <mat-label>Description</mat-label>
-                <input matInput placeholder="Enter Description" formControlName="description"
-                  [errorStateMatcher]="matcher">
-                <mat-error>
-                  <span *ngIf="!hoodForm.get('description').valid && hoodForm.get('description').touched">Enter
-                    Description
-                  </span>
-                  <span>Enter Description</span>
-                </mat-error>
-              </mat-form-field>
-
-
-              <!-- <mat-form-field class="example"> -->
-              <mat-label>Image</mat-label>
-              <input type="file" placeholder="Enter Image" formControlName="image" (change)="showPreview($event)">
-              <!-- </mat-form-field> -->
-              <br>
-              <mat-form-field class="example">
-                <mat-label>Location</mat-label>
-                <input matInput placeholder="Enter Location" formControlName="location" [errorStateMatcher]="matcher">
-                <mat-error>
-                  <span *ngIf="!hoodForm.get('location').valid && hoodForm.get('location').touched">Enter Location
-                  </span>
-                  <span>Enter Location</span>
-                </mat-error>
-              </mat-form-field>
-              <button color="primary" type="submit" [disabled]="!hoodForm.valid" mat-button matSuffix mat-icon-button
-                aria-label="Send">
-                <mat-icon>send</mat-icon>
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </mat-card>
-  </div>
-</div>
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
-  data-backdrop="false">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>

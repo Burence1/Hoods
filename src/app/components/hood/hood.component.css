@@ -407,5 +407,51 @@ h3 {
 .img-responsive{
   width: 100%;
 	object-fit: cover;
+  height: 100%;
+}
+
+
+/*  */
+
+
+.img{
+  width: 100%;
   height: inherit;
+	object-fit: cover;
+}
+
+#hoodData{
+	color: black;
+}
+
+.avatar{
+	margin-bottom: 0%;
+	height: 2em;
+	width: 2em;
+}
+
+.page {
+	 color: white;
+	 padding: 0 1rem;
+	 background: #f1f5f9;
+}
+ .page__box {
+	 min-height: 120px;
+	 background: #1e293b;
+	 margin: 0 -1rem;
+	 font-size: 36px;
+}
+
+ .page__content {
+	 height: calc(80vh - 178px);
+	 margin-top: -2rem;
+	 background: white;
+	 color: #1e293b;
+	 overflow: hidden;
+	 font-size: larger;
+}
+ .page__content-data {
+	 top: 50%;
+	 left: 50%;
+	 transform: translate(-50%, -50%);
 }
