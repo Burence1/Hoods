@@ -49,6 +49,11 @@ export class HoodComponent implements OnInit {
   user: any;
   userHood: any;
 
+  image:any
+  location:any
+  title:any
+  description:any
+
   constructor(private Auth: AngularFireAuth, private db: AngularFireDatabase, private service: HoodsService,
     private formBuilder: FormBuilder) {
     this.Auth.authState.subscribe(auth => {

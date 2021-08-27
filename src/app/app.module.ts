@@ -47,7 +47,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { CategoryComponent } from './components/category/category.component';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -89,6 +89,7 @@ import { CategoryComponent } from './components/category/category.component';
     MatDialogModule,
     MatSelectModule,
     MatMenuModule,
+    // NgModule,
 
   ],
   providers: [],
