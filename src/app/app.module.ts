@@ -48,6 +48,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { CategoryComponent } from './components/category/category.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SidenavComponent,
     NavComponent,
     CategoryComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

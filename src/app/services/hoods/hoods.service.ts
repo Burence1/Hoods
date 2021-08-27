@@ -47,12 +47,6 @@ export class HoodsService {
         this.username = this.userData.displayName
         this.occupant = this.userData.hood;
       });
-
-      firebase.database().ref('hoods/').on('value', resp => {
-        const hoodData = snapshotToArray(resp);
-        this.hood = hoodData.filter(x => x.title === 'moringa');
-        console.log(this.hood)
-      });
     });
   }
 

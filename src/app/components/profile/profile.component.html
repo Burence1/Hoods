@@ -1,0 +1,123 @@
+<main>
+  <div class="jumbo"></div>
+  <div class="container icons">
+    <div class="big-icon"></div>
+    <!-- <div class="add">
+      <a class="add-btn btn-floating btn-large waves-effect waves-light red"><i class="material-icons">mode_edit_outline</i></a>
+    </div> -->
+  </div>
+  <div class="details">
+    <h3>Leonardo DiCaprio</h3>
+    <p>Kilimani Hood</p>
+  </div>
+  <div class="container bio">
+    <div class="title">
+      <h6>Biography</h6>
+    </div>
+    <div class="content">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro officiis fugit hic vel voluptates perferendis
+        aut quibusdam sit omnis unde aspernatur quae repellat blanditiis autem, a libero asperiores neque illum aliquid
+        est tempore. Eveniet velit voluptate amet facere, repellendus aperiam, cumque est ipsam. Asperiores expedita
+        iusto, inventore sit suscipit nihil repudiandae? Laboriosam cum maxime dolorem neque, in veniam expedita ad. Hic
+        fugit necessitatibus blanditiis, optio dignissimos molestiae nam, numquam odio.</p>
+    </div>
+    <hr />
+  </div>
+  <div class="container pics">
+    <div class="title">
+      <h6>Pictures</h6>
+    </div>
+    <div class="row row-1">
+      <div class="col m6 s12">
+        <div class="card">
+          <div class="card-image" id="first-img">
+            <span class="card-title">Inception</span>
+          </div>
+        </div>
+      </div>
+      <div class="col m6 s12">
+        <div class="card">
+          <div class="card-image" id="second-img">
+            <span class="card-title">Django Unchained</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col m6 s12">
+        <div class="card">
+          <div class="card-image" id="third-img">
+            <span class="card-title">The Wolf of Wallstreet</span>
+          </div>
+        </div>
+      </div>
+      <div class="col m6 s12">
+        <div class="card">
+          <div class="card-image" id="forth-img">
+            <span class="card-title">The Great Gatsby</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+<div class="text-center" id="input">
+  <form class="example-form" [formGroup]="profileForm" (ngSubmit)="newProfile(profileForm.value);profileForm.reset()">
+    <h2><strong>Add New Neighborhood</strong></h2>
+    <div class="new-room">
+      <table>
+        <tr>
+          <td>
+            <mat-form-field class="example">
+              <mat-label>Name</mat-label>
+              <input matInput placeholder="Enter your name" formControlName="name" [errorStateMatcher]="matcher">
+              <mat-error>
+                <span *ngIf="!profileForm.get('name').valid && profileForm.get('name').touched">Enter room
+                  name</span>
+                <span>Enter your name</span>
+              </mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example">
+              <mat-label>Bio</mat-label>
+              <textarea matInput placeholder="Enter Bio" formControlName="bio"
+                [errorStateMatcher]="matcher"></textarea>
+              <mat-error>
+                <span *ngIf="!profileForm.get('bio').valid && profileForm.get('bio').touched">Enter
+                  Bio
+                </span>
+                <span>Enter Bio</span>
+              </mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="file" placeholder="Enter Image" formControlName="image" (change)="showPreview($event)">
+          </td>
+          <td>
+            <mat-form-field class="example">
+              <mat-label>Contact</mat-label>
+              <input matInput placeholder="Enter your Contacts" formControlName="contact" [errorStateMatcher]="matcher">
+              <mat-icon matSuffix>phone</mat-icon>
+              <mat-hint>Include area code</mat-hint>
+              <mat-error>
+                <span *ngIf="!profileForm.get('contact').valid && profileForm.get('contact').touched">Enter
+                  Contact
+                </span>
+                <span>Enter Contact</span>
+              </mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+        <button class="switch__button button switch-btn" type="submit" [disabled]="!profileForm.valid" mat-button matSuffix
+          mat-icon-button aria-label="Send" style="color: #f9f9f9;">
+          Add Profile
+        </button>
+      </table>
+    </div>
+  </form>
+</div>
