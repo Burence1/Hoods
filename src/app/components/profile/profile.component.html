@@ -113,6 +113,19 @@
             </mat-form-field>
           </td>
         </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example">
+              <mat-label>Select hood</mat-label>
+              <input matInput placeholder="hood" formControlName="hood" [errorStateMatcher]="matcher" />
+              <mat-select formControlName="hood">
+                <mat-option *ngFor="let x of hoods" [value]="x.title">
+                  {{x?.title}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </tr>
         <button class="switch__button button switch-btn" type="submit" [disabled]="!profileForm.valid" mat-button matSuffix
           mat-icon-button aria-label="Send" style="color: #f9f9f9;">
           Add Profile

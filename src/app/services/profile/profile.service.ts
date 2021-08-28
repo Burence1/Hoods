@@ -72,8 +72,16 @@ export class ProfileService {
                 duration: 2000
               });
             } else {
+              const userId = this.user.uid;
+              const path = `/users/${userId}`;
               const newHood = firebase.database().ref('profiles/').push();
               newHood.set(profile);
+              const data = {
+                hood: profile.hood,
+              }
+              this.db.object('users/' + userId).update(data);
+
+              // firebase.database().ref('users/'+userId).update(profile.hood);
             }
           });
         })

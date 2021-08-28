@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
@@ -39,6 +39,7 @@ export class ProfileComponent implements OnInit {
   profileForm: FormGroup
   selectedImage:any
   matcher = new MyErrorStateMatcher();
+  hoods: Array<any>;
 
   constructor(
     private Auth: AngularFireAuth, private db: AngularFireDatabase, private service: ProfileService,
@@ -51,7 +52,16 @@ export class ProfileComponent implements OnInit {
       bio: [null, Validators.required],
       contact: [null, Validators.required],
       image: [null, Validators.required],
+      hood:[null,Validators.required],
     });
+    this.getHoods()
+  }
+
+  getHoods() {
+    return firebase.database().ref('hoods/').once("value", snap => {
+      this.hoods = snapshotToArray(snap)
+      console.log(this.hoods)
+    })
   }
 
   newProfile(form: any) {
