@@ -1,7 +1,6 @@
 <mat-nav-list>
-  <img class="avatar mat-elevation-z8 mb-5" src="../../../assets/images/regi.jpg" />
-  <!-- <h4 class="name">Dr.{{ profile.displayName }}</h4>
-  <p class="designation">{{ profile.department }}</p> -->
+  <img class="avatar mat-elevation-z8 mb-5" *ngFor="let data of profile" [src]="data.image" />
+  <h4 class="name" style="color: white;" *ngFor="let data of profile">{{ data.displayName }}</h4>
   <mat-divider></mat-divider>
   <h2 matSubheader class="mt-2">APPLICATIONS</h2>
 

@@ -49,6 +49,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { CategoryComponent } from './components/category/category.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileComponent } from './components/profile/profile.component';
+import { PostsComponent } from './components/posts/posts.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     NavComponent,
     CategoryComponent,
     ProfileComponent,
+    PostsComponent,
   ],
   imports: [
     BrowserModule,

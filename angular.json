@@ -37,7 +37,9 @@
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "src/assets/js/card.js",
               "src/assets/js/category.js",
-              "src/assets/js/profile.js"
+              "src/assets/js/profile.js",
+              "src/assets/js/tab.js",
+              "src/assets/js/business.js"
             ]
           },
           "configurations": {

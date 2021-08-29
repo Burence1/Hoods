@@ -1,3 +1,4 @@
+import { Profile } from './../../interfaces/profile/profile';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import firebase from 'firebase/app';
@@ -26,12 +27,16 @@ export const snapshotToArray = (snapshot: any) => {
 })
 export class ProfileService {
 
-  user:any;
-  userData:any;
-  username:string;
-  occupant:string;
+  user: any;
+  userData: any;
+  username: string;
+  occupant: string;
   ref: any
-  img:any
+  img: any
+  profile: any[];
+  email: string
+  profileData:any
+  userProfile:any
 
   constructor(private db: AngularFireDatabase,
     private Auth: AngularFireAuth, private router: Router,
@@ -44,8 +49,16 @@ export class ProfileService {
         this.userData = res;
         this.username = this.userData.displayName
         this.occupant = this.userData.hood;
-      });});
-     }
+        this.email = this.userData.email
+
+        // firebase.database().ref('users/').on('value', resp => {
+        //   const profileData = snapshotToArray(resp);
+        //   this.profile = profileData.filter(x => x.email === this.email);
+        //   console.log(this.profile)
+        // });
+      });
+    });
+  }
   getUser() {
     const userId = this.user.uid;
     const path = `/users/${userId}`;
@@ -53,7 +66,7 @@ export class ProfileService {
   }
 
   addProfile(form: any, selectedImage: any) {
-    this.ref = firebase.database().ref('profiles/');
+    this.ref = firebase.database().ref('users/');
     var name = selectedImage.name;
     const path = `profiles/${name}`
     const fileRef = this.storage.ref(path);
@@ -61,29 +74,29 @@ export class ProfileService {
       finalize(() => {
         fileRef.getDownloadURL().subscribe((url) => {
           const profile = form;
-          profile.user = this.user.uid;
+          profile.email = this.user.email
           this.img = url;
           profile.image = this.img
           console.log(profile.image)
 
-          this.ref.orderByChild('name').equalTo(profile.name).once('value', (snapshot: any) => {
-            if (snapshot.exists()) {
-              this.snackBar.open('Profile already exist!', 'undo', {
-                duration: 2000
-              });
-            } else {
-              const userId = this.user.uid;
-              const path = `/users/${userId}`;
-              const newHood = firebase.database().ref('profiles/').push();
-              newHood.set(profile);
-              const data = {
-                hood: profile.hood,
-              }
-              this.db.object('users/' + userId).update(data);
+          const userId = this.user.uid;
+          firebase.database().ref('users/' + userId).update(profile);
+          const data = {
+            hood: profile.hood,
+            displayName: profile.name
+          }
+          this.db.object('users/' + userId).update(data);
 
-              // firebase.database().ref('users/'+userId).update(profile.hood);
-            }
-          });
+          // this.ref.orderByChild('email').equalTo(profile.email).once('value', (snapshot: any) => {
+          //   if (snapshot.exists()) {
+          //     this.snackBar.open('Profile already exist!', 'undo', {
+          //       duration: 2000
+          //     });
+          //   } else {
+
+
+          //   }
+          // });
         })
       })
     ).subscribe();

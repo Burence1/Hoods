@@ -9,6 +9,7 @@ import 'firebase/firestore';
 import { HoodsService } from 'src/app/services/hoods/hoods.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { ProfileService } from 'src/app/services/profile/profile.service';
 
 export const snapshotToArray = (snapshot: any) => {
   const returnArr: any[] = [];
@@ -37,6 +38,8 @@ export class HomeComponent implements OnInit {
   chatname:any
   myHood:any
   data:any
+  profile:any
+  email:string
 
   sideBarOpen = false;
 
@@ -54,7 +57,7 @@ export class HomeComponent implements OnInit {
   constructor(private Auth:AngularFireAuth,private db:AngularFireDatabase,
     private auth: AuthService,
     private breakpointObserver: BreakpointObserver,
-    private service: HoodsService) {
+    private service: HoodsService,private pservice:ProfileService) {
     this.Auth.authState.subscribe(auth => {
       if (auth !== undefined && auth !== null) {
         this.user = auth;
@@ -62,19 +65,15 @@ export class HomeComponent implements OnInit {
       this.getUser().valueChanges().subscribe(a => {
         this.userName = a;
         this.data = this.userName.hood
-        console.log(this.data)
         this.chatname = this.userName.displayName;
         
         firebase.database().ref('hoods/').on('value', resp => {
           const hoodData = snapshotToArray(resp);
           this.hood = hoodData.filter(x => x.title === this.data);
           console.log(this.hood)
-        });
-        
+        });        
       });
-    
     })
-    
   }
 
 
@@ -87,10 +86,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
 
   }
-  
-  // getHood() {
-  //   this.currentHood = this.service.getHood()
-  // }
 
   logout() {
     this.auth.logout();

@@ -1,136 +1,161 @@
-<main>
-  <div class="jumbo"></div>
+<main *ngFor="let data of profile">
+  <div class="jumbo">
+  </div>
   <div class="container icons">
-    <div class="big-icon"></div>
+    <div class="big-icon" [ngStyle]="{'background-image': 'url(' + data.image + ')'}"></div>
     <!-- <div class="add">
       <a class="add-btn btn-floating btn-large waves-effect waves-light red"><i class="material-icons">mode_edit_outline</i></a>
     </div> -->
   </div>
   <div class="details">
-    <h3>Leonardo DiCaprio</h3>
-    <p>Kilimani Hood</p>
+    <h3>{{data.name}}</h3>
+    <p class="text-capitalize">{{data.hood}} hood</p>
+    <p class="text-capitalize">{{data.contact}}</p>
+    <p class="text-lowercase">{{data.email}}</p>
   </div>
   <div class="container bio">
     <div class="title">
       <h6>Biography</h6>
     </div>
     <div class="content">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro officiis fugit hic vel voluptates perferendis
-        aut quibusdam sit omnis unde aspernatur quae repellat blanditiis autem, a libero asperiores neque illum aliquid
-        est tempore. Eveniet velit voluptate amet facere, repellendus aperiam, cumque est ipsam. Asperiores expedita
-        iusto, inventore sit suscipit nihil repudiandae? Laboriosam cum maxime dolorem neque, in veniam expedita ad. Hic
-        fugit necessitatibus blanditiis, optio dignissimos molestiae nam, numquam odio.</p>
+      <p>{{data.bio}}</p>
     </div>
     <hr />
   </div>
-  <div class="container pics">
-    <div class="title">
-      <h6>Pictures</h6>
-    </div>
-    <div class="row row-1">
-      <div class="col m6 s12">
-        <div class="card">
-          <div class="card-image" id="first-img">
-            <span class="card-title">Inception</span>
-          </div>
-        </div>
-      </div>
-      <div class="col m6 s12">
-        <div class="card">
-          <div class="card-image" id="second-img">
-            <span class="card-title">Django Unchained</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col m6 s12">
-        <div class="card">
-          <div class="card-image" id="third-img">
-            <span class="card-title">The Wolf of Wallstreet</span>
-          </div>
-        </div>
-      </div>
-      <div class="col m6 s12">
-        <div class="card">
-          <div class="card-image" id="forth-img">
-            <span class="card-title">The Great Gatsby</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </main>
 
+<!--  -->
 
-<div class="text-center" id="input">
-  <form class="example-form" [formGroup]="profileForm" (ngSubmit)="newProfile(profileForm.value);profileForm.reset()">
-    <h2><strong>Add New Neighborhood</strong></h2>
-    <div class="new-room">
-      <table>
-        <tr>
-          <td>
-            <mat-form-field class="example">
-              <mat-label>Name</mat-label>
-              <input matInput placeholder="Enter your name" formControlName="name" [errorStateMatcher]="matcher">
-              <mat-error>
-                <span *ngIf="!profileForm.get('name').valid && profileForm.get('name').touched">Enter room
-                  name</span>
-                <span>Enter your name</span>
-              </mat-error>
-            </mat-form-field>
-          </td>
-          <td>
-            <mat-form-field class="example">
-              <mat-label>Bio</mat-label>
-              <textarea matInput placeholder="Enter Bio" formControlName="bio"
-                [errorStateMatcher]="matcher"></textarea>
-              <mat-error>
-                <span *ngIf="!profileForm.get('bio').valid && profileForm.get('bio').touched">Enter
-                  Bio
-                </span>
-                <span>Enter Bio</span>
-              </mat-error>
-            </mat-form-field>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input type="file" placeholder="Enter Image" formControlName="image" (change)="showPreview($event)">
-          </td>
-          <td>
-            <mat-form-field class="example">
-              <mat-label>Contact</mat-label>
-              <input matInput placeholder="Enter your Contacts" formControlName="contact" [errorStateMatcher]="matcher">
-              <mat-icon matSuffix>phone</mat-icon>
-              <mat-hint>Include area code</mat-hint>
-              <mat-error>
-                <span *ngIf="!profileForm.get('contact').valid && profileForm.get('contact').touched">Enter
-                  Contact
-                </span>
-                <span>Enter Contact</span>
-              </mat-error>
-            </mat-form-field>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <mat-form-field class="example">
-              <mat-label>Select hood</mat-label>
-              <input matInput placeholder="hood" formControlName="hood" [errorStateMatcher]="matcher" />
-              <mat-select formControlName="hood">
-                <mat-option *ngFor="let x of hoods" [value]="x.title">
-                  {{x?.title}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </td>
-        </tr>
-        <button class="switch__button button switch-btn" type="submit" [disabled]="!profileForm.valid" mat-button matSuffix
-          mat-icon-button aria-label="Send" style="color: #f9f9f9;">
-          Add Profile
-        </button>
-      </table>
+<!-- Navigation -->
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="tab-wrap">
+    
+      <input type="radio" name="tabs" id="tab2" checked>
+      <div class="tab-label-content" id="tab2-content">
+        <label for="tab2"><i class="fa fa-code" aria-hidden="true"></i>BUSINESSES</label>
+        <div class="tab-content">
+          <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let data of business">
+              <!-- Normal Demo-->
+              <div class="column">
+                <!-- Post-->
+                <div class="post-module">
+                  <!-- Thumbnail-->
+                  <div class="thumbnail">
+                    <img [src]="data.image" />
+                  </div>
+                  <!-- Post Content-->
+                  <div class="post-content">
+                    <div class="category">{{data.category}}</div>
+                    <h1 class="title">{{data.title}}</h1>
+                    <h2 class="sub_title">{{data.description}}</h2>
+                    <p class="description">{{data.description}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <input type="radio" name="tabs" id="tab3">
+      <div class="tab-label-content" id="tab3-content">
+        <label for="tab3"><i class="fa fa-line-chart" aria-hidden="true"></i>POSTS</label>
+        <div class="tab-content">TAB 3 - Donec vulputate ante ac ligula vestibulum, id mollis diam commodo. Integer at
+          consequat magna. Sed elit sem, dictum nec porttitor ac, ultrices id enim. Morbi semper eros a enim malesuada, eu
+          finibus erat dictum. Ut vitae orci a odio sagittis malesuada. Cras volutpat vel lorem in tempor. Duis ultricies
+          lectus sit amet tellus vehicula faucibus. Etiam sed leo ac erat tempor feugiat at quis ipsum. Mauris pellentesque
+          nisl lorem, ac finibus sapien sagittis vel. Donec et lobortis est. Vestibulum dignissim ligula nec erat interdum,
+          quis sollicitudin metus pretium. Vestibulum quis dui sapien. Proin commodo justo ac orci elementum molestie.
+          Aliquam mattis orci vitae volutpat commodo.</div>
+      </div>
+    
+      <input type="radio" name="tabs" id="tab4">
+      <div class="tab-label-content" id="tab4-content">
+        <label for="tab4"><i class="fa fa-envelope" aria-hidden="true"></i>Edit Profile</label>
+        <div class="tab-content">
+          <div class="text-center" id="input">
+            <form class="example-form" [formGroup]="profileForm"
+              (ngSubmit)="newProfile(profileForm.value);profileForm.reset()">
+              <h2><strong>Update Profile</strong></h2>
+              <div class="new-room">
+                <table>
+                  <tr>
+                    <td>
+                      <mat-form-field class="example">
+                        <mat-label>Name</mat-label>
+                        <input matInput placeholder="Enter your name" formControlName="name" [errorStateMatcher]="matcher">
+                        <mat-error>
+                          <span *ngIf="!profileForm.get('name').valid && profileForm.get('name').touched">Enter room
+                            name</span>
+                          <span>Enter your name</span>
+                        </mat-error>
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field class="example">
+                        <mat-label>Bio</mat-label>
+                        <textarea matInput placeholder="Enter Bio" formControlName="bio"
+                          [errorStateMatcher]="matcher"></textarea>
+                        <mat-error>
+                          <span *ngIf="!profileForm.get('bio').valid && profileForm.get('bio').touched">Enter
+                            Bio
+                          </span>
+                          <span>Enter Bio</span>
+                        </mat-error>
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <mat-label>profile image</mat-label><br>
+                      <input type="file" placeholder="Enter Image" formControlName="image" (change)="showPreview($event)">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <mat-form-field class="example">
+                        <mat-label>Contact</mat-label>
+                        <input matInput placeholder="Enter your Contacts" formControlName="contact"
+                          [errorStateMatcher]="matcher">
+                        <mat-icon matSuffix>phone</mat-icon>
+                        <mat-hint>Include area code</mat-hint>
+                        <mat-error>
+                          <span *ngIf="!profileForm.get('contact').valid && profileForm.get('contact').touched">Enter
+                            Contact
+                          </span>
+                          <span>Enter Contact</span>
+                        </mat-error>
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field class="example">
+                        <mat-label>Select hood</mat-label>
+                        <input matInput placeholder="hood" formControlName="hood" [errorStateMatcher]="matcher" />
+                        <mat-select formControlName="hood">
+                          <mat-option *ngFor="let x of hoods" [value]="x.title">
+                            {{x?.title}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  <button class="switch__button button switch-btn" type="submit" [disabled]="!profileForm.valid" mat-button
+                    matSuffix mat-icon-button aria-label="Send" style="color: #f9f9f9;">
+                    Add Profile
+                  </button>
+                </table>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="slide"></div>
     </div>
-  </form>
+
+  </div>
+  <div class="col-md-1"></div>
 </div>
+

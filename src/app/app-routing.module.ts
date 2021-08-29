@@ -1,3 +1,4 @@
+import { PostsComponent } from './components/posts/posts.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { BusinessComponent } from './components/business/business.component';
 import { CategoryComponent } from './components/category/category.component';
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path:'home',component:HomeComponent},
   {path:'category',component:CategoryComponent},
   {path:'business/:businesses',component:BusinessComponent},
-  {path:'profile',component:ProfileComponent}
+  {path:'profile',component:ProfileComponent},
+  {path:'posts',component:PostsComponent}
 ];
 
 @NgModule({
