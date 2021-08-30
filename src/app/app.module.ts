@@ -46,10 +46,13 @@ import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTableModule } from '@angular/material/table'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CategoryComponent } from './components/category/category.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PostsComponent } from './components/posts/posts.component';
+import { ConvolistComponent } from './components/convolist/convolist.component';
+import { ChatfeedComponent } from './components/chatfeed/chatfeed.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +68,8 @@ import { PostsComponent } from './components/posts/posts.component';
     CategoryComponent,
     ProfileComponent,
     PostsComponent,
+    ConvolistComponent,
+    ChatfeedComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,7 +98,8 @@ import { PostsComponent } from './components/posts/posts.component';
     MatDialogModule,
     MatSelectModule,
     MatMenuModule,
-    // NgModule,
+    MatTableModule,
+    MatProgressSpinnerModule,
 
   ],
   providers: [],

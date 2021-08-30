@@ -1,3 +1,5 @@
+import { ChatfeedComponent } from './components/chatfeed/chatfeed.component';
+import { ConvolistComponent } from './components/convolist/convolist.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { BusinessComponent } from './components/business/business.component';
@@ -20,7 +22,9 @@ const routes: Routes = [
   {path:'category',component:CategoryComponent},
   {path:'business/:businesses',component:BusinessComponent},
   {path:'profile',component:ProfileComponent},
-  {path:'posts',component:PostsComponent}
+  {path:'posts',component:PostsComponent},
+  {path:'chatlist',component:ConvolistComponent},
+  {path:'chatfeed/:groupname',component:ChatfeedComponent}
 ];
 
 @NgModule({

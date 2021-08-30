@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="row">
+    <!-- 		Clear night -->
+    <div class="col">
+      <div class="weather-card one">
+        <div class="top">
+          <div class="wrapper">
+            <div class="mynav">              
+            </div>
+            <form class="example-form" [formGroup]="convoForm" (ngSubmit)="newGroup(convoForm.value);convoForm.reset()">
+              <h2><strong>Create New Group</strong></h2>
+              <div class="new-room">
+                <table>
+                  <tr>
+                    <td>
+                      <mat-form-field class="example">
+                        <mat-label>Title</mat-label>
+                        <input matInput placeholder="Enter group title" formControlName="title" [errorStateMatcher]="matcher">
+                        <mat-error>
+                          <span *ngIf="!convoForm.get('title').valid && convoForm.get('title').touched">Enter group
+                            title</span>
+                          <span>Enter group title</span>
+                        </mat-error>
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field class="example">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput placeholder="Enter Description" formControlName="description"
+                          [errorStateMatcher]="matcher"></textarea>
+                        <mat-error>
+                          <span *ngIf="!convoForm.get('description').valid && convoForm.get('description').touched">Enter
+                            Description
+                          </span>
+                          <span>Enter Description</span>
+                        </mat-error>
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: center;">
+                      <input type="file" placeholder="Enter Image" formControlName="image" (change)="showPreview($event)">
+                    </td>
+                  </tr>
+                  <button class="switch__button button switch-btn" type="submit" [disabled]="!convoForm.valid" mat-button matSuffix
+                    mat-icon-button aria-label="Send" style="color: #f9f9f9;">
+                    Create
+                  </button>
+                </table>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="bottom">
+          <div class="wrapper">
+            <span class="date">Chat Groups</span>
+            <div class="example-loading-shade" *ngIf="isLoadingResults">
+              <mat-progress-spinner mode="indeterminate" color="primary" *ngIf="isLoadingResults"></mat-progress-spinner>
+            </div>
+            <div class="titles" *ngFor="let data of groups">
+              <mat-card (click)="enterChat(data.title)"><img class="img-responsive" [src]="data.image">{{data.title}}</mat-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
