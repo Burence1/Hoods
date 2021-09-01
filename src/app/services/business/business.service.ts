@@ -80,15 +80,6 @@ export class BusinessService {
           const newHood = firebase.database().ref('business/').push();
           newHood.set(business);
 
-          // this.ref.orderByChild('title').equalTo(business.title).once('value', (snapshot: any) => {
-          //   if (snapshot.exists()) {
-          //     this.snackBar.open('Business already exist!', 'undo', {
-          //       duration: 2000
-          //     });
-          //   } else {
-              
-          //   }
-          // });
         })
       })
     ).subscribe();

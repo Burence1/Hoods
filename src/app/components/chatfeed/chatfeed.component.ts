@@ -43,6 +43,7 @@ export class ChatfeedComponent implements OnInit {
   data: string
   user: any
   chats: any[];
+  group: any[]
   groupname: string
 
   constructor(private Auth: AngularFireAuth, private db: AngularFireDatabase,
@@ -52,18 +53,27 @@ export class ChatfeedComponent implements OnInit {
         this.user = auth;
       }
       this.getUser().valueChanges().subscribe(a => {
-      this.userData = a;
-      this.data = this.userData.hood
-      console.log(this.data)
-      this.chatname = this.userData.displayName;
+        this.userData = a;
+        this.data = this.userData.hood
+        console.log(this.data)
+        this.chatname = this.userData.displayName;
 
-    });
-    this.groupname = this.route.snapshot.params.name;
-    firebase.database().ref('chats/').on('value', resp => {
-      const chats = snapshotToArray(resp);
-      this.chats = chats.filter(x => x.hood === this.groupname);
-      console.log(this.chats);
-    });
+
+        this.groupname = this.route.snapshot.params.name;
+        console.log(this.groupname)
+        firebase.database().ref('chats/').on('value', resp => {
+          const chats = snapshotToArray(resp);
+          this.chats = chats.filter(x => x.hood === this.groupname);
+          console.log(this.chats);
+        });
+        this.groupname = this.route.snapshot.params.name;
+        firebase.database().ref('chatgroups/').on('value', resp => {
+          console.log(this.groupname)
+          const data = snapshotToArray(resp);
+          this.group = data.filter(x => x.hood === this.groupname);
+          console.log(this.group);
+        });
+      });
     });
   }
 

@@ -22,8 +22,8 @@
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
               <div class="card m-0">
-                <div class="chatInfo">
-                  <h5 class="title text-center">Welcome</h5>
+                <div class="chatInfo" *ngFor="let data of this.group">
+                  <h5 class="title text-center">{{data.title}}</h5>
                 </div>
 
                 <!-- Row start -->

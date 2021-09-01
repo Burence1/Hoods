@@ -70,9 +70,6 @@ export class BusinessComponent implements OnInit {
           const businessData = snapshotToArray(resp);
           this.businessHood = businessData.filter(x => x.hood === this.data && x.category === this.businessCategory);
 
-          // this.filterData = this.businessHood.filter(x => x.category === this.businessCategory);
-          // console.log(this.businessHood)
-          // console.log(this.filterData)
           this.allBusiness = businessData
           console.log(this.allBusiness)
         });

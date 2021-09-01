@@ -35,7 +35,6 @@ export class CategoryComponent implements OnInit {
     firebase.database().ref('categories/').on('value', resp => {
       const hoodData = snapshotToArray(resp);
       this.allCategories = hoodData
-      console.log(this.allCategories)
     });
    }
 
