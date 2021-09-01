@@ -61,7 +61,8 @@ export class ConvolistComponent implements OnInit {
         this.chatname = this.userData.displayName;
 
         firebase.database().ref('chatgroups/').on('value', resp => {
-          this.groups = snapshotToArray(resp);
+          const data = snapshotToArray(resp);
+          this.groups = data.filter(x=>x.hood === this.data)
           this.isLoadingResults = false;
           console.log(this.groups)
         });

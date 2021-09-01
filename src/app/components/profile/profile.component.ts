@@ -91,6 +91,7 @@ export class ProfileComponent implements OnInit {
       image: [null, Validators.required],
       hood: [null, Validators.required],
     });
+    this.getHoods()
   }
 
   getHoods() {
