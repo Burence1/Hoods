@@ -1,5 +1,6 @@
+import { filter, map } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, pipe } from 'rxjs';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
@@ -8,7 +9,7 @@ import 'firebase/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { ProfileService } from 'src/app/services/profile/profile.service';
-
+import { Profile } from 'src/app/interfaces/profile/profile';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -41,12 +42,15 @@ export class ProfileComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
   hoods: Array<any>;
   user: any
-  profile: any[]
   userData: any;
   username: string;
   occupant: string;
   email: string
   business: any[];
+  posts:any[]
+  profdata:any[]
+  name:any[]
+  myProf:any[];
 
   constructor(
     private Auth: AngularFireAuth, private db: AngularFireDatabase, private service: ProfileService,
@@ -62,17 +66,15 @@ export class ProfileComponent implements OnInit {
         this.occupant = this.userData.hood;
         this.email = this.userData.email
 
-        firebase.database().ref('users/').on('value', resp => {
-          const profileData = snapshotToArray(resp);
-          this.profile = profileData.filter(x => x.email === this.email);
-          console.log(this.profile)
-        });
-
         firebase.database().ref('business/').on('value', resp => {
           const profileData = snapshotToArray(resp);
           this.business = profileData.filter(x => x.owner === this.username);
           console.log(this.business)
         });
+        firebase.database().ref('posts/').on('value',resp => {
+          const postsData = snapshotToArray(resp);
+          this.posts = postsData.filter( x => x.author === this.username)
+        })
       });
     });
   }
@@ -92,6 +94,16 @@ export class ProfileComponent implements OnInit {
       hood: [null, Validators.required],
     });
     this.getHoods()
+    
+    this.findProfile()
+  }
+
+  findProfile(){
+    this.service.getProfile().subscribe(x => {
+      const data = x
+      this.myProf = data.filter(x => x.email === this.email)
+
+    })
   }
 
   getHoods() {

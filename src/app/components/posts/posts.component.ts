@@ -9,6 +9,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PostsService } from 'src/app/services/posts/posts.service';
+import { ProfileService } from 'src/app/services/profile/profile.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -42,10 +43,13 @@ export class PostsComponent implements OnInit {
   selectedImage: any = null;
   userData:any
   chatname:string
-  data:any
+  hood:string
   postData:any[]
+  profile:any[]
+  email: string
+  data:any
 
-  constructor(
+  constructor(private pservice:ProfileService,
     private Auth: AngularFireAuth, private db: AngularFireDatabase, private service: PostsService,
     private formBuilder: FormBuilder, private route: ActivatedRoute
   ) { 
@@ -55,22 +59,32 @@ export class PostsComponent implements OnInit {
       }
       this.getUser().valueChanges().subscribe(a => {
         this.userData = a;
-        this.data = this.userData.hood
+        this.hood = this.userData.hood
+        this.email = this.userData.email
         this.chatname = this.userData.displayName;
-
-        firebase.database().ref('posts/').on('value', resp => {
-          const postData = snapshotToArray(resp);
-          this.postData = postData.filter(x => x.hood === this.data);
-
-        });
       });
     });
   }
+
 
   getUser() {
     const userId = this.user.uid;
     const path = `/users/${userId}`;
     return this.db.object(path);
+  }
+
+  getProfile(){
+    this.pservice.getProfile().subscribe(x=>{
+      const profile = x
+      this.profile = profile.filter(x => x.email === this.email)
+    })
+  }
+
+  getPosts(){
+    this.service.getPosts().subscribe(x => {
+      const data = x
+      this.postData = data.filter(x => x.hood === this.profile[0].hood)
+    })
   }
 
   ngOnInit(): void {
@@ -79,6 +93,8 @@ export class PostsComponent implements OnInit {
       content: [null, Validators.required],
       image: [null, Validators.required],
     });
+    this.getProfile()
+    this.getPosts()
   }
 
   newPost(form: any) {
@@ -89,5 +105,4 @@ export class PostsComponent implements OnInit {
   showPreview(event: any) {
     this.selectedImage = event.target.files[0];
   }
-
 }

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -33,7 +33,7 @@ export class ProfileService {
   occupant: string;
   ref: any
   img: any
-  profile: any[];
+  profile: any;
   email: string
   profileData:any
   userProfile:any
@@ -51,11 +51,13 @@ export class ProfileService {
         this.occupant = this.userData.hood;
         this.email = this.userData.email
 
-        // firebase.database().ref('users/').on('value', resp => {
-        //   const profileData = snapshotToArray(resp);
-        //   this.profile = profileData.filter(x => x.email === this.email);
-        //   console.log(this.profile)
-        // });
+
+        firebase.database().ref('users/').on('value', resp => {
+          const profileData = snapshotToArray(resp);
+          this.profile = profileData.filter(x => x.email === this.email);
+          console.log(this.profile)
+        });
+
       });
     });
   }
@@ -63,6 +65,10 @@ export class ProfileService {
     const userId = this.user.uid;
     const path = `/users/${userId}`;
     return this.db.object(path);
+  }
+
+  getProfile():Observable<Profile[]>{
+    return this.db.list<Profile>('/users').valueChanges();
   }
 
   addProfile(form: any, selectedImage: any) {

@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
+import { Posts } from 'src/app/interfaces/posts/posts';
 
 export const snapshotToArray = (snapshot: any) => {
   const returnArr: any[] = [];
@@ -46,6 +47,10 @@ export class PostsService {
         this.chatname = this.userData.displayName;
       });
     });
+  }
+
+  getPosts():Observable<Posts[]>{
+    return this.db.list<Posts>('/posts').valueChanges();
   }
 
   getUser() {

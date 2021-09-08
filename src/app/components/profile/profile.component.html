@@ -1,4 +1,4 @@
-<main *ngFor="let data of profile">
+<main *ngFor="let data of myProf">
   <div class="jumbo">
   </div>
   <div class="container icons">
@@ -21,8 +21,6 @@
   </div>
 </main>
 
-<!--  -->
-
 <!-- Navigation -->
 <div class="row">
   <div class="col-md-1"></div>
@@ -31,7 +29,7 @@
     
       <input type="radio" name="tabs" id="tab2" checked>
       <div class="tab-label-content" id="tab2-content">
-        <label for="tab2"><i class="fa fa-code" aria-hidden="true"></i>BUSINESSES</label>
+        <label for="tab2"><i class="fa fa-code" aria-hidden="true"></i>MY BUSINESSES</label>
         <div class="tab-content">
           <div class="row">
             <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let data of business">
@@ -59,14 +57,29 @@
     
       <input type="radio" name="tabs" id="tab3">
       <div class="tab-label-content" id="tab3-content">
-        <label for="tab3"><i class="fa fa-line-chart" aria-hidden="true"></i>POSTS</label>
-        <div class="tab-content">TAB 3 - Donec vulputate ante ac ligula vestibulum, id mollis diam commodo. Integer at
-          consequat magna. Sed elit sem, dictum nec porttitor ac, ultrices id enim. Morbi semper eros a enim malesuada, eu
-          finibus erat dictum. Ut vitae orci a odio sagittis malesuada. Cras volutpat vel lorem in tempor. Duis ultricies
-          lectus sit amet tellus vehicula faucibus. Etiam sed leo ac erat tempor feugiat at quis ipsum. Mauris pellentesque
-          nisl lorem, ac finibus sapien sagittis vel. Donec et lobortis est. Vestibulum dignissim ligula nec erat interdum,
-          quis sollicitudin metus pretium. Vestibulum quis dui sapien. Proin commodo justo ac orci elementum molestie.
-          Aliquam mattis orci vitae volutpat commodo.</div>
+        <label for="tab3"><i class="fa fa-line-chart" aria-hidden="true"></i>MY POSTS</label>
+        <div class="tab-content">
+          <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let data of posts">
+              <!-- Normal Demo-->
+              <div class="column">
+                <!-- Post-->
+                <div class="post-module">
+                  <!-- Thumbnail-->
+                  <div class="thumbnail">
+                    <img [src]="data.image" />
+                  </div>
+                  <!-- Post Content-->
+                  <div class="post-content">
+                    <div class="category">{{data.hood}}</div>
+                    <h1 class="title">{{data.title}}</h1>
+                    <h2 class="sub_title">{{data.content}}</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     
       <input type="radio" name="tabs" id="tab4">
