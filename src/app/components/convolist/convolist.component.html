@@ -54,9 +54,6 @@
         <div class="bottom">
           <div class="wrapper">
             <span class="date">Chat Groups</span>
-            <div class="example-loading-shade" *ngIf="isLoadingResults">
-              <mat-progress-spinner mode="indeterminate" color="primary" *ngIf="isLoadingResults"></mat-progress-spinner>
-            </div>
             <div class="titles" *ngFor="let data of groups">
               <mat-card (click)="enterChat(data.title)"><img class="img-responsive" [src]="data.image">{{data.title}}</mat-card>
             </div>

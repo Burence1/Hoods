@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
-
+import { Convolist } from 'src/app/interfaces/convolist/convolist';
+import { Chat } from 'src/app/interfaces/chat/chat';
 
 export const snapshotToArray = (snapshot: any) => {
   const returnArr: any[] = [];
@@ -48,14 +49,7 @@ export class ChatService {
       this.getUser().valueChanges().subscribe(a => {
         this.userData = a;
         this.data = this.userData.hood
-        console.log(this.data)
         this.chatname = this.userData.displayName;
-
-        firebase.database().ref('hoods/').on('value', resp => {
-          const hoodData = snapshotToArray(resp);
-          this.userHood = hoodData.filter(x => x.title === this.data);
-          console.log(this.userHood)
-        });
       });
     });
   }
@@ -65,6 +59,14 @@ export class ChatService {
     return this.db.object(path);
   }
   
+  getConvoList():Observable<Convolist[]>{
+    return this.db.list<Convolist>('/chatgroups').valueChanges()
+  }
+
+  getMessages():Observable<Chat[]>{
+    return this.db.list<Chat>('/chats').valueChanges()
+  }
+
   createGroup(form: any, selectedImage: any) {
     this.ref = firebase.database().ref('chatgroups/');
     var name = selectedImage.name;
@@ -102,11 +104,9 @@ export class ChatService {
     var dateTime = date + ' ' + time;
 
     const chat = form;
-    chat.groupname = this.data;
     chat.chatname = this.chatname;
     chat.date = dateTime;
     const newMessage = firebase.database().ref('chats/').push();
     newMessage.set(chat);
   }
-
 }

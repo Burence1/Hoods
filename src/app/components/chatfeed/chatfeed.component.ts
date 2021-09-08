@@ -55,25 +55,27 @@ export class ChatfeedComponent implements OnInit {
       this.getUser().valueChanges().subscribe(a => {
         this.userData = a;
         this.data = this.userData.hood
-        console.log(this.data)
         this.chatname = this.userData.displayName;
 
-
-        this.groupname = this.route.snapshot.params.name;
-        console.log(this.groupname)
-        firebase.database().ref('chats/').on('value', resp => {
-          const chats = snapshotToArray(resp);
-          this.chats = chats.filter(x => x.hood === this.groupname);
-          console.log(this.chats);
-        });
-        this.groupname = this.route.snapshot.params.name;
-        firebase.database().ref('chatgroups/').on('value', resp => {
-          console.log(this.groupname)
-          const data = snapshotToArray(resp);
-          this.group = data.filter(x => x.hood === this.groupname);
-          console.log(this.group);
-        });
+        // this.groupname = this.route.snapshot.params.name;
+        // console.log(this.groupname)
+        // firebase.database().ref('chats/').on('value', resp => {
+        //   const chats = snapshotToArray(resp);
+        //   this.chats = chats.filter(x => x.groupname === this.groupname);
+        // });
+        // this.groupname = this.route.snapshot.params.name;
+        // firebase.database().ref('chatgroups/').on('value', resp => {
+        //   console.log(this.groupname)
+        //   const data = snapshotToArray(resp);
+        //   this.group = data.filter(x => x.hood === this.groupname);
+        //   console.log(this.group);
+        // });
       });
+      this.groupname = this.route.snapshot.params.groupname
+      this.service.getMessages().subscribe(x => {
+        const data = x
+        this.chats = data.filter(x => x.groupname === this.groupname)
+      })
     });
   }
 
@@ -91,6 +93,7 @@ export class ChatfeedComponent implements OnInit {
 
   newMessage(form: any) {
     const data = form
+    data.groupname = this.groupname
     this.service.sendMessage(data)
   }
 

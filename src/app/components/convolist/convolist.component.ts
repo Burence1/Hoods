@@ -60,13 +60,11 @@ export class ConvolistComponent implements OnInit {
         console.log(this.data)
         this.chatname = this.userData.displayName;
 
-        firebase.database().ref('chatgroups/').on('value', resp => {
-          const data = snapshotToArray(resp);
-          this.groups = data.filter(x=>x.hood === this.data)
-          this.isLoadingResults = false;
-          console.log(this.groups)
-        });
       });
+      this.service.getConvoList().subscribe(x =>{
+        const data = x
+        this.groups = data.filter(x => x.hood === this.data)
+      })
     });
   }
 
