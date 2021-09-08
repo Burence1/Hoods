@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
+import { Category } from 'src/app/interfaces/category/category';
 
 export const snapshotToArray = (snapshot: any) => {
   const returnArr: any[] = [];
@@ -59,6 +60,10 @@ export class BusinessService {
     const userId = this.user.uid;
     const path = `/users/${userId}`;
     return this.db.object(path);
+  }
+
+  getCategory():Observable<Category[]>{
+    return this.db.list<Category>('/categories').valueChanges();
   }
 
   

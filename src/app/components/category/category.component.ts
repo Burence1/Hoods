@@ -8,6 +8,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { BusinessService } from 'src/app/services/business/business.service';
 
 
 export const snapshotToArray = (snapshot: any) => {
@@ -31,14 +32,17 @@ export class CategoryComponent implements OnInit {
 
   allCategories:any[];
 
-  constructor(private db: AngularFireDatabase,private route:Router) {
-    firebase.database().ref('categories/').on('value', resp => {
-      const hoodData = snapshotToArray(resp);
-      this.allCategories = hoodData
-    });
+  constructor(private db: AngularFireDatabase,private route:Router,private service:BusinessService) {
    }
 
   ngOnInit(): void {
+    this.getCategories()
+  }
+
+  getCategories(){
+    this.service.getCategory().subscribe(x => {
+      this.allCategories = x
+    })
   }
 
   categoryBusinesses(businesses:string){
