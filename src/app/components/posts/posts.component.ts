@@ -63,9 +63,12 @@ export class PostsComponent implements OnInit {
         this.email = this.userData.email
         this.chatname = this.userData.displayName;
       });
+      this.service.getPosts().subscribe(x => {
+        const data = x
+        this.postData = data.filter(x => x.hood === this.hood)
+      })
     });
   }
-
 
   getUser() {
     const userId = this.user.uid;
@@ -80,12 +83,12 @@ export class PostsComponent implements OnInit {
     })
   }
 
-  getPosts(){
-    this.service.getPosts().subscribe(x => {
-      const data = x
-      this.postData = data.filter(x => x.hood === this.profile[0].hood)
-    })
-  }
+  // getPosts(){
+  //   this.service.getPosts().subscribe(x => {
+  //     const data = x
+  //     this.postData = data.filter(x => x.hood === this.profile[0].hood)
+  //   })
+  // }
 
   ngOnInit(): void {
     this.postForm = this.formBuilder.group({
@@ -94,7 +97,7 @@ export class PostsComponent implements OnInit {
       image: [null, Validators.required],
     });
     this.getProfile()
-    this.getPosts()
+    // this.getPosts()
   }
 
   newPost(form: any) {

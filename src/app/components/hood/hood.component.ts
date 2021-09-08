@@ -65,14 +65,6 @@ export class HoodComponent implements OnInit {
         this.data = this.userName.hood
         console.log(this.data)
         this.chatname = this.userName.displayName;
-
-        firebase.database().ref('hoods/').on('value', resp => {
-          const hoodData = snapshotToArray(resp);
-          this.userHood = hoodData.filter(x => x.title === this.data);
-          console.log(this.userHood)
-          this.allHoods = hoodData
-          console.log(this.allHoods)
-        });
       });
     });
   }
@@ -84,6 +76,7 @@ export class HoodComponent implements OnInit {
       location: [null, Validators.required],
       image: [null, Validators.required],
     });
+    this.getHood()
   }
 
   getUser() {
@@ -98,7 +91,9 @@ export class HoodComponent implements OnInit {
   }
 
   getHood() {
-    this.service.getHood()
+    this.service.getHoods().subscribe(x =>{
+      this.allHoods = x
+    })
   }
 
   currentUser() {

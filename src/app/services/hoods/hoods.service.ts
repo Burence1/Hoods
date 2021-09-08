@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
+import { Hood } from 'src/app/interfaces/hood/hood';
 
 export const snapshotToArray = (snapshot: any) => {
   const returnArr: any[] = [];
@@ -91,10 +92,7 @@ export class HoodsService {
     ).subscribe();
   }
 
-  getHoods() {
-    return firebase.database().ref('hoods/').once("value", snap => {
-      this.hoods = snapshotToArray(snap)
-      console.log(this.hoods)
-    })
+  getHoods():Observable<Hood[]>{
+    return this.db.list<Hood>('/hoods').valueChanges()
   }
 }

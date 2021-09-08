@@ -10,6 +10,7 @@ import { HoodsService } from 'src/app/services/hoods/hoods.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { ProfileService } from 'src/app/services/profile/profile.service';
+import { HomeService } from 'src/app/services/home/home.service';
 
 export const snapshotToArray = (snapshot: any) => {
   const returnArr: any[] = [];
@@ -57,7 +58,7 @@ export class HomeComponent implements OnInit {
   constructor(private Auth:AngularFireAuth,private db:AngularFireDatabase,
     private auth: AuthService,
     private breakpointObserver: BreakpointObserver,
-    private service: HoodsService,private pservice:ProfileService) {
+    private service: HoodsService,private pservice:ProfileService,private hservice:HomeService) {
     this.Auth.authState.subscribe(auth => {
       if (auth !== undefined && auth !== null) {
         this.user = auth;
@@ -65,17 +66,15 @@ export class HomeComponent implements OnInit {
       this.getUser().valueChanges().subscribe(a => {
         this.userName = a;
         this.data = this.userName.hood
-        this.chatname = this.userName.displayName;
-        
-        firebase.database().ref('hoods/').on('value', resp => {
-          const hoodData = snapshotToArray(resp);
-          this.hood = hoodData.filter(x => x.title === this.data);
-          console.log(this.hood)
-        });        
+               
       });
+      this.hservice.getHood().subscribe(x => {
+        const data = x
+        console.log(this.data)
+        this.hood = data.filter(x => x.title === this.data)
+      })
     })
   }
-
 
   getUser() {
     const userId = this.user.uid;

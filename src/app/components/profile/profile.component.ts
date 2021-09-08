@@ -75,6 +75,10 @@ export class ProfileComponent implements OnInit {
           const postsData = snapshotToArray(resp);
           this.posts = postsData.filter( x => x.author === this.username)
         })
+        this.service.getProfile().subscribe(x => {
+          const data = x
+          this.myProf = data.filter(x => x.email === this.email)
+        })
       });
     });
   }
@@ -95,16 +99,15 @@ export class ProfileComponent implements OnInit {
     });
     this.getHoods()
     
-    this.findProfile()
+    // this.findProfile()
   }
 
-  findProfile(){
-    this.service.getProfile().subscribe(x => {
-      const data = x
-      this.myProf = data.filter(x => x.email === this.email)
-
-    })
-  }
+  // findProfile(){
+  //   this.service.getProfile().subscribe(x => {
+  //     const data = x
+  //     this.myProf = data.filter(x => x.email === this.email)
+  //   })
+  // }
 
   getHoods() {
     return firebase.database().ref('hoods/').once("value", snap => {
