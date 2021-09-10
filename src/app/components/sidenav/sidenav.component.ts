@@ -64,18 +64,15 @@ export class SidenavComponent implements OnInit {
         this.chatname = this.userName.displayName;
         this.email = this.userName.email
 
-        firebase.database().ref('hoods/').on('value', resp => {
-          const hoodData = snapshotToArray(resp);
-          this.hood = hoodData.filter(x => x.title === this.data);
-          console.log(this.hood)
-        });
-        firebase.database().ref('users/').on('value', resp => {
-          const profileData = snapshotToArray(resp);
-          this.profile = profileData.filter(x => x.email === this.email);
-          console.log(this.profile)
-        });
-
       });
+      this.getProfile()
+    })
+  }
+
+  getProfile(){
+    this.pservice.getProfile().subscribe(x =>{
+      const data =x 
+      this.profile = data.filter(x => x.email === this.email)
     })
   }
 
@@ -91,5 +88,4 @@ export class SidenavComponent implements OnInit {
   logout(){
     this.auth.logout();
   }
-
 }

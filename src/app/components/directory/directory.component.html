@@ -1,20 +1,18 @@
-<div class="blog-card spring-fever">
-  <div class="title-content">
-    <h3>SPRING FEVER</h3>
-    <hr />
-    <div class="intro">Yllamco laboris nisi ut aliquip ex ea commodo.</div>
-  </div><!-- /.title-content -->
-  <div class="card-info">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-    aliqua. Ut enim ad minim.
+<section class="section">
+  <h1 class="text-center">Residents</h1>
+  <div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12" *ngFor="let data of profiles">
+      <figure class="snip1336">
+        <img src="../../../assets/images/cover.jpg" alt="sample87" />
+        <figcaption>
+          <img [src]="data.image"
+            class="profile" />
+          <h2>{{data.name}}<span>Resident</span></h2>
+          <p>{{data.bio |slice:0:30}}</p>
+          <mat-icon>phone_iphone</mat-icon>&nbsp;&nbsp;{{data.contact}}<br>
+          <mat-icon>email</mat-icon>&nbsp;&nbsp;{{data.email}}
+        </figcaption>
+      </figure>
+    </div>
   </div>
-  <div class="utility-info">
-    <ul class="utility-list">
-      <li class="comments">12</li>
-      <li class="date">03.12.2015</li>
-    </ul>
-  </div>
-
-  <div class="gradient-overlay"></div>
-  <div class="color-overlay"></div>
-</div>
+</section>
