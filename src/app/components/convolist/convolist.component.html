@@ -5,7 +5,7 @@
       <div class="weather-card one">
         <div class="top">
           <div class="wrapper">
-            <div class="mynav">              
+            <div class="mynav">
             </div>
             <form class="example-form" [formGroup]="convoForm" (ngSubmit)="newGroup(convoForm.value);convoForm.reset()">
               <h2><strong>Create New Group</strong></h2>
@@ -15,7 +15,8 @@
                     <td>
                       <mat-form-field class="example">
                         <mat-label>Title</mat-label>
-                        <input matInput placeholder="Enter group title" formControlName="title" [errorStateMatcher]="matcher">
+                        <input matInput placeholder="Enter group title" formControlName="title"
+                          [errorStateMatcher]="matcher">
                         <mat-error>
                           <span *ngIf="!convoForm.get('title').valid && convoForm.get('title').touched">Enter group
                             title</span>
@@ -29,7 +30,8 @@
                         <textarea matInput placeholder="Enter Description" formControlName="description"
                           [errorStateMatcher]="matcher"></textarea>
                         <mat-error>
-                          <span *ngIf="!convoForm.get('description').valid && convoForm.get('description').touched">Enter
+                          <span
+                            *ngIf="!convoForm.get('description').valid && convoForm.get('description').touched">Enter
                             Description
                           </span>
                           <span>Enter Description</span>
@@ -39,11 +41,12 @@
                   </tr>
                   <tr>
                     <td style="text-align: center;">
-                      <input type="file" placeholder="Enter Image" formControlName="image" (change)="showPreview($event)">
+                      <input type="file" placeholder="Enter Image" formControlName="image"
+                        (change)="showPreview($event)">
                     </td>
                   </tr>
-                  <button class="switch__button button switch-btn" type="submit" [disabled]="!convoForm.valid" mat-button matSuffix
-                    mat-icon-button aria-label="Send" style="color: #f9f9f9;">
+                  <button class="switch__button button switch-btn" type="submit" [disabled]="!convoForm.valid"
+                    mat-button matSuffix mat-icon-button aria-label="Send" style="color: #f9f9f9;">
                     Create
                   </button>
                 </table>
@@ -53,14 +56,14 @@
         </div>
         <div class="bottom">
           <div class="wrapper">
-            <span class="date">Chat Groups</span>
+            <div class="date">Chat Groups</div>
             <div class="titles" *ngFor="let data of groups">
-              <mat-card (click)="enterChat(data.title)"><img class="img-responsive" [src]="data.image">{{data.title}}</mat-card>
+              <mat-card (click)="enterChat(data.title)"><img class="img-responsive" [src]="data.image">&nbsp;&nbsp; {{data.title}}
+              </mat-card>
             </div>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 </div>

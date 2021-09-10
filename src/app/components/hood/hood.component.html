@@ -1,22 +1,16 @@
 <div class="container-fluid page">
   <section class="container">
     <div class="row">
-      <div class=".flip-card">
+      <div class="flip-card">
         <div class="page__content shadow position-relative d-flex">
           <div class="row" id="hoodImage">
             <div class="image" id="image">
               <img src="../../../assets/images/addhood.jpg" alt="logo" class="img">
-              <div class="mouse" id="mouse">
-                <span></span>
-              </div>
             </div>
           </div>
 
           <div class="row text-center" id="addHoodForm">
             <div id="formImage">
-              <div class="image">
-                <img src="../../../assets/images/addhood.jpg" alt="logo" class="img">
-              </div>
             </div>
             <div class="text-center" id="input">
               <form class="example-form" [formGroup]="hoodForm" (ngSubmit)="newHood(hoodForm.value);hoodForm.reset()">
@@ -89,7 +83,7 @@
       <div class="col-md-3 col-sm-6 col-xs-12" *ngFor="let hood of this.allHoods">
         <article class="material-card Blue-Grey">
           <h2>
-            <span>{{hood.title}}</span>
+            <span>{{hood.title}} Hood</span>
             <strong>
               <i class="fa fa-fw fa-star"></i>
               {{hood.location}}
@@ -99,23 +93,6 @@
             <div class="img-container">
               <img class="img-responsive" [src]="hood.image">
             </div>
-            <div class="mc-description">
-              Freeman has received Academy Award nominations for his performances in Street Smart, Driving Miss Daisy,
-              The
-              Shawshank Redemption and Invictus ...
-            </div>
-          </div>
-          <a class="mc-btn-action">
-            <i class="fa fa-bars"></i>
-          </a>
-          <div class="mc-footer">
-            <h4>
-              Social
-            </h4>
-            <a class="fa fa-fw fa-facebook"></a>
-            <a class="fa fa-fw fa-twitter"></a>
-            <a class="fa fa-fw fa-linkedin"></a>
-            <a class="fa fa-fw fa-google-plus"></a>
           </div>
         </article>
       </div>

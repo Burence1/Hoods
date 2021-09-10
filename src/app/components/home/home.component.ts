@@ -1,3 +1,4 @@
+import { Hood } from './../../interfaces/hood/hood';
 import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
@@ -44,6 +45,8 @@ export class HomeComponent implements OnInit {
 
   sideBarOpen = false;
 
+  images: any[] = []
+
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
   }
@@ -73,7 +76,16 @@ export class HomeComponent implements OnInit {
         console.log(this.data)
         this.hood = data.filter(x => x.title === this.data)
       })
+      this.getHoods().subscribe(x => {
+        const data = x
+        this.images = data.map(x => x.image)
+        console.log(this.images)
+      })
     })
+  }
+
+  getHoods():Observable<Hood[]>{
+    return this.db.list<Hood>('/hoods').valueChanges();
   }
 
   getUser() {

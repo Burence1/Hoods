@@ -53,6 +53,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { ConvolistComponent } from './components/convolist/convolist.component';
 import { ChatfeedComponent } from './components/chatfeed/chatfeed.component';
+import { DirectoryComponent } from './components/directory/directory.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { ChatfeedComponent } from './components/chatfeed/chatfeed.component';
     PostsComponent,
     ConvolistComponent,
     ChatfeedComponent,
+    DirectoryComponent,
   ],
   imports: [
     BrowserModule,

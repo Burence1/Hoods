@@ -1,3 +1,4 @@
+import { DirectoryComponent } from './components/directory/directory.component';
 import { ChatfeedComponent } from './components/chatfeed/chatfeed.component';
 import { ConvolistComponent } from './components/convolist/convolist.component';
 import { PostsComponent } from './components/posts/posts.component';
@@ -24,7 +25,8 @@ const routes: Routes = [
   {path:'profile',component:ProfileComponent},
   {path:'posts',component:PostsComponent},
   {path:'chatlist',component:ConvolistComponent},
-  {path:'chatfeed/:groupname',component:ChatfeedComponent}
+  {path:'chatfeed/:groupname',component:ChatfeedComponent},
+  {path:'directory',component:DirectoryComponent}
 ];
 
 @NgModule({

@@ -76,8 +76,6 @@ export class SidenavComponent implements OnInit {
         });
 
       });
-
-
     })
   }
 
@@ -88,6 +86,10 @@ export class SidenavComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  logout(){
+    this.auth.logout();
   }
 
 }

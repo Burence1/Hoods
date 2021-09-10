@@ -1,8 +1,8 @@
 <mat-nav-list>
-  <img class="avatar mat-elevation-z8 mb-5" *ngFor="let data of profile" [src]="data.image" />
+  <img class="avatar mat-elevation-z8 mb-3 mt-5" *ngFor="let data of profile" [src]="data.image" />
   <h4 class="name" style="color: white;" *ngFor="let data of profile">{{ data.displayName }}</h4>
   <mat-divider></mat-divider>
-  <h2 matSubheader class="mt-2">APPLICATIONS</h2>
+  <h2 matSubheader class="mt-2"></h2>
 
   <a mat-list-item routerLinkActive="list-item-active" routerLink="/home">
     <mat-icon>home</mat-icon> Home
@@ -29,5 +29,11 @@
   routerLink="/hood"
   routerLinkActive="active">
     <mat-icon>apartment</mat-icon> All Hoods
+  </a>
+  <a mat-list-item routerLink="/directory" routerLinkActive="active">
+    <mat-icon>contact_page</mat-icon> Directory
+  </a>
+  <a mat-list-item routerLinkActive="active" (click)="logout()">
+    <mat-icon>logout</mat-icon> Logout
   </a>
 </mat-nav-list>

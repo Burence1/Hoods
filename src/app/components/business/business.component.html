@@ -6,17 +6,11 @@
           <div class="row" id="hoodImage">
             <div class="image" id="image">
               <img src="../../../assets/images/business.jpg" alt="logo" class="img">
-              <div class="mouse" id="mouse">
-                <span></span>
-              </div>
             </div>
           </div>
 
           <div class="row text-center" id="addHoodForm">
             <div id="formImage">
-              <div class="image">
-                <img src="../../../assets/images/business.jpg" alt="logo" class="img">
-              </div>
             </div>
             <div class="text-center" id="input">
               <form class="example-form" [formGroup]="businessForm"
@@ -107,38 +101,24 @@
 
   <section class="container">
     <div class="row active-with-click mt-5">
-      <div class="col-md-3 col-sm-6 col-xs-12" *ngFor="let hood of this.businessHood">
-        <article class="material-card Blue-Grey">
-          <h2>
-            <span>{{hood.title}}</span>
-            <strong>
-              <i class="fa fa-fw fa-star"></i>
-              {{hood.location}}
-            </strong>
-          </h2>
-          <div class="mc-content">
-            <div class="img-container">
-              <img class="img-responsive" [src]="hood.image">
-            </div>
-            <div class="mc-description">
-              Freeman has received Academy Award nominations for his performances in Street Smart, Driving Miss Daisy,
-              The
-              Shawshank Redemption and Invictus ...
-            </div>
+      <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let data of businessHood">
+        <div class="blog-card spring-fever" [ngStyle]="{'background-image': 'url(' + data.image + ')'}">
+          <div class="title-content">
+            <h3>{{data.title}}</h3>
+            <hr />
+            <div class="intro">Located: {{data.location}}</div>
+            <div class="intro">Owner: {{data.owner}}</div>
+          </div><!-- /.title-content -->
+          <div class="card-info">
+            {{data.description}}
           </div>
-          <a class="mc-btn-action">
-            <i class="fa fa-bars"></i>
-          </a>
-          <div class="mc-footer">
-            <h4>
-              Social
-            </h4>
-            <a class="fa fa-fw fa-facebook"></a>
-            <a class="fa fa-fw fa-twitter"></a>
-            <a class="fa fa-fw fa-linkedin"></a>
-            <a class="fa fa-fw fa-google-plus"></a>
+          <div class="utility-info">
+           
           </div>
-        </article>
+        
+          <div class="gradient-overlay"></div>
+          <div class="color-overlay"></div>
+        </div>
       </div>
     </div>
   </section>
