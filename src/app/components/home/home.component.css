@@ -12,6 +12,10 @@
   bottom: 0;
 }
 
+#quote{
+	margin-left: 50%;
+}
+
 .avatar{
 	margin-bottom: 0%;
 	height: 2em;
