@@ -16,7 +16,7 @@
             <div class="text-center" id="input">
               <form class="example-form" [formGroup]="postForm"
                 (ngSubmit)="newPost(postForm.value);postForm.reset()">
-                <h2>Add Your Article</h2>
+                <h2>Add Post</h2>
                 <div class="new-room">
                   <table>
                     <tr>
@@ -57,7 +57,7 @@
                       <td>
                         <button class="switch__button button switch-btn" type="submit" [disabled]="!postForm.valid"
                           mat-button matSuffix mat-icon-button aria-label="Send" style="color: #f9f9f9;">
-                          Add Article
+                          Submit
                         </button>
                       </td>
                     </tr>
@@ -74,37 +74,27 @@
 
   <section class="container">
     <div class="row active-with-click mt-5">
-      <div class="col-md-3 col-sm-6 col-xs-12" *ngFor="let data of this.postData">
-        <article class="material-card Blue-Grey">
-          <h2>
-            <span>{{data.title}}</span>
-            <strong>
-              <i class="fa fa-fw fa-star"></i>
-              {{data.author}}
-            </strong>
-          </h2>
-          <div class="mc-content">
-            <div class="img-container">
-              <img class="img-responsive" [src]="data.image">
-            </div>
-            <div class="mc-description">
-              Freeman has received Academy Award nominations for his performances in Street Smart, Driving Miss Daisy,
-              The
-              Shawshank Redemption and Invictus ...
-            </div>
+      <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let data of this.postData">
+        <article class="card">
+          <header class="card__thumb">
+            <a href="#"><img
+                [src]="data.image"></a>
+        
+          </header>
+          <div class="card__date">
+            <span class="card__date__day">{{data.date | date:'d'}}</span>
+            <span class="card__date__month">{{data.date | date:'MMM'}}</span>
           </div>
-          <a class="mc-btn-action">
-            <i class="fa fa-bars"></i>
-          </a>
-          <div class="mc-footer">
-            <h4>
-              Social
-            </h4>
-            <a class="fa fa-fw fa-facebook"></a>
-            <a class="fa fa-fw fa-twitter"></a>
-            <a class="fa fa-fw fa-linkedin"></a>
-            <a class="fa fa-fw fa-google-plus"></a>
+          <div class="card__body">
+            <div class="card__category"><a href="#">Category</a></div>
+            <div class="card__title"><a href="#">{{data.title}}</a></div>
+            <div class="card__subtitle">Donec posuere vulputate</div>
+            <p class="card__description">{{data.content | slice:0:250}}</p>
           </div>
+          <footer class="card__footer">
+            <span class="icon icon--time">6 min</span>
+            <span class="icon icon--comment"><a href="#">2 comments</a></span>
+          </footer>
         </article>
       </div>
     </div>

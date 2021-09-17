@@ -60,6 +60,11 @@ export class PostsService {
   }
 
   addPost(form: any, selectedImage: any) {
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    var time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    var dateTime = date + ' ' + time;
+
     this.ref = firebase.database().ref('posts/');
     var name = selectedImage.name;
     const path = `posts/${name}`
@@ -71,6 +76,7 @@ export class PostsService {
           post.author = this.chatname;
           post.hood = this.data;
           this.img = url;
+          post.date = dateTime
           post.image = this.img
           const newHood = firebase.database().ref('posts/').push();
           newHood.set(post);

@@ -96,5 +96,4 @@ export class ChatfeedComponent implements OnInit {
     data.groupname = this.groupname
     this.service.sendMessage(data)
   }
-
 }

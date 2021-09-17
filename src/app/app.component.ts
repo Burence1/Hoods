@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'hoods';
 
-  sideBarOpen = true;
+  sideBarOpen = false;
 
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;

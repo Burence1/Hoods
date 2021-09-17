@@ -511,7 +511,7 @@ footer.sticky-footer {
   border-bottom-right-radius: .4em;
   padding: 5px 10px 10px;
   max-width: 70vh;
-  text-align: right;
+  text-align: left;
 }
 
 .chat-message .right-bubble span.msg-name {

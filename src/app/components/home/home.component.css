@@ -7,6 +7,11 @@
 	color: black;
 }
 
+#directory{
+	position: absolute;
+  bottom: 0;
+}
+
 .avatar{
 	margin-bottom: 0%;
 	height: 2em;

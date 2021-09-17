@@ -12,8 +12,7 @@
           <div class="desc col-md-5">
             <div class="mt-5">
               <h1 class="back text-center">Welcome To<br> <a><strong>{{data.title}}</strong>!</a></h1>
-              <p class="wel-text">Consult is a clinical communication and collaboration platform that
-                coordinates activities and data flow between health workers</p>
+              <p class="wel-text">{{data.description}}</p>
             </div>
             <div class="location text-center small" style="vertical-align: bottom">
               <img class="avatar" src="../../../assets/images/map.svg" />&nbsp;&nbsp;<span>{{data.location}}</span>
@@ -90,17 +89,16 @@
         <div class="row" *ngFor="let data of hood">
           <div class="col-md-7">
             <div class="image">
-              <img [src]="data.image" alt="logo" class="img">
+              <img src="../../../assets/images/connect.jpg" alt="logo" class="img">
             </div>
           </div>
           <div class="desc col-md-5">
             <div class="mt-5">
-              <h1 class="back text-center">Welcome To<br> <a><strong>{{data.title}}</strong>!</a></h1>
-              <p class="wel-text">Consult is a clinical communication and collaboration platform that
-                coordinates activities and data flow between health workers</p>
+              <h1 class="back text-center"><a><strong>Hood Directory</strong></a></h1>
+              <p class="wel-text">Connect with other local residents</p>
             </div>
-            <div class="location text-center small" style="vertical-align: bottom">
-              <img class="avatar" src="../../../assets/images/map.svg" />&nbsp;&nbsp;<span>{{data.location}}</span>
+            <div class="location text-center small" id="directory" style="vertical-align: bottom">
+              <a class="btn btn-lg view " href="/about"> View </a>
             </div>
           </div>
         </div>
