@@ -1,18 +1,28 @@
-<section class="section">
-  <h1 class="text-center">Residents</h1>
-  <div class="row">
-    <div class="col-md-3 col-sm-6 col-xs-12" *ngFor="let data of profiles">
-      <figure class="snip1336">
-        <img src="../../../assets/images/cover.jpg" alt="sample87" />
-        <figcaption>
-          <img [src]="data.image"
-            class="profile" />
-          <h2>{{data.name}}<span>Resident</span></h2>
-          <p>{{data.bio |slice:0:30}}</p>
-          <mat-icon>phone_iphone</mat-icon>&nbsp;&nbsp;{{data.contact}}<br>
-          <mat-icon>email</mat-icon>&nbsp;&nbsp;{{data.email}}
-        </figcaption>
-      </figure>
+<mat-drawer-container>
+  <mat-drawer mode="side" [opened]="sideBarOpen">
+    <app-sidenav></app-sidenav>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div class="d-flex page__box">
+      <app-nav (toggleSidebarForMe)="sideBarToggler()"></app-nav>
     </div>
-  </div>
-</section>
+
+    <section class="section">
+      <h1 class="text-center">Residents</h1>
+      <div class="row">
+        <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let data of profiles">
+          <figure class="snip1336">
+            <img src="../../../assets/images/cover.jpg" alt="sample87" />
+            <figcaption>
+              <img [src]="data.image" class="profile" />
+              <h2>{{data.name}}<span>Resident</span></h2>
+              <p>Bio: {{data.bio |slice:0:40}}</p>
+              <mat-icon>phone_iphone</mat-icon>&nbsp;&nbsp;{{data.contact}}<br>
+              <mat-icon>email</mat-icon>&nbsp;&nbsp;{{data.email}}
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+  </mat-drawer-content>
+</mat-drawer-container>

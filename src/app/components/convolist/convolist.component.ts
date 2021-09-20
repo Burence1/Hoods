@@ -47,6 +47,12 @@ export class ConvolistComponent implements OnInit {
   groups: any[]
   isLoadingResults = true;
 
+  sideBarOpen = true;
+
+  sideBarToggler() {
+    this.sideBarOpen = !this.sideBarOpen;
+  }
+
 
   constructor(private Auth: AngularFireAuth, private db: AngularFireDatabase, private service: ChatService,
     private formBuilder: FormBuilder, private router: Router) {
@@ -60,11 +66,12 @@ export class ConvolistComponent implements OnInit {
         console.log(this.data)
         this.chatname = this.userData.displayName;
 
+        this.service.getConvoList().subscribe(x => {
+          const data = x
+          this.groups = data.filter(x => x.hood === this.data)
+        });
+
       });
-      this.service.getConvoList().subscribe(x =>{
-        const data = x
-        this.groups = data.filter(x => x.hood === this.data)
-      })
     });
   }
 

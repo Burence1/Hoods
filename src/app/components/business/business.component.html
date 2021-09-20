@@ -1,3 +1,12 @@
+<mat-drawer-container>
+  <mat-drawer mode="side" [opened]="sideBarOpen">
+    <app-sidenav></app-sidenav>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div class="d-flex page__box">
+      <app-nav (toggleSidebarForMe)="sideBarToggler()"></app-nav>
+    </div>
+
 <div class="container-fluid page">
   <section class="container">
     <div class="row">
@@ -5,7 +14,7 @@
         <div class="page__content shadow position-relative d-flex">
           <div class="row" id="hoodImage">
             <div class="image" id="image">
-              <img src="../../../assets/images/business.jpg" alt="logo" class="img">
+              <img src="../../../assets/images/hustle.jpg" alt="logo" class="img">
             </div>
           </div>
 
@@ -123,7 +132,8 @@
     </div>
   </section>
 </div>
-
+</mat-drawer-content>
+</mat-drawer-container>
 
 
 <!-- <div class="example-sidenav-content">

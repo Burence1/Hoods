@@ -54,6 +54,12 @@ export class HoodComponent implements OnInit {
   title:any
   description:any
 
+  sideBarOpen = true;
+
+  sideBarToggler() {
+    this.sideBarOpen = !this.sideBarOpen;
+  }
+
   constructor(private Auth: AngularFireAuth, private db: AngularFireDatabase, private service: HoodsService,
     private formBuilder: FormBuilder) {
     this.Auth.authState.subscribe(auth => {

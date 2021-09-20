@@ -1,3 +1,11 @@
+<mat-drawer-container>
+  <mat-drawer mode="side" [opened]="sideBarOpen">
+    <app-sidenav></app-sidenav>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div class="d-flex page__box">
+      <app-nav (toggleSidebarForMe)="sideBarToggler()"></app-nav>
+    </div>
 <main *ngFor="let data of myProf">
   <div class="jumbo">
   </div>
@@ -26,10 +34,12 @@
   <div class="col-md-1"></div>
   <div class="col-md-10">
     <div class="tab-wrap">
-    
+
       <input type="radio" name="tabs" id="tab2" checked>
       <div class="tab-label-content" id="tab2-content">
-        <label for="tab2"><mat-icon>business</mat-icon> MY BUSINESSES</label>
+        <label for="tab2">
+          <mat-icon>business</mat-icon> MY BUSINESSES
+        </label>
         <div class="tab-content">
           <div class="row">
             <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let data of business">
@@ -54,10 +64,12 @@
           </div>
         </div>
       </div>
-    
+
       <input type="radio" name="tabs" id="tab3">
       <div class="tab-label-content" id="tab3-content">
-        <label for="tab3"><mat-icon>article</mat-icon> MY POSTS</label>
+        <label for="tab3">
+          <mat-icon>article</mat-icon> MY POSTS
+        </label>
         <div class="tab-content">
           <div class="row">
             <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let data of posts">
@@ -81,10 +93,12 @@
           </div>
         </div>
       </div>
-    
+
       <input type="radio" name="tabs" id="tab4">
       <div class="tab-label-content" id="tab4-content">
-        <label for="tab4"><mat-icon>edit</mat-icon> Edit Profile</label>
+        <label for="tab4">
+          <mat-icon>edit</mat-icon> Edit Profile
+        </label>
         <div class="tab-content">
           <div class="text-center" id="input">
             <form class="example-form" [formGroup]="profileForm"
@@ -96,7 +110,8 @@
                     <td>
                       <mat-form-field class="example">
                         <mat-label>Name</mat-label>
-                        <input matInput placeholder="Enter your name" formControlName="name" [errorStateMatcher]="matcher">
+                        <input matInput placeholder="Enter your name" formControlName="name"
+                          [errorStateMatcher]="matcher">
                         <mat-error>
                           <span *ngIf="!profileForm.get('name').valid && profileForm.get('name').touched">Enter room
                             name</span>
@@ -121,7 +136,8 @@
                   <tr>
                     <td>
                       <mat-label>profile image</mat-label><br>
-                      <input type="file" placeholder="Enter Image" formControlName="image" (change)="showPreview($event)">
+                      <input type="file" placeholder="Enter Image" formControlName="image"
+                        (change)="showPreview($event)">
                     </td>
                   </tr>
                   <tr>
@@ -152,8 +168,8 @@
                       </mat-form-field>
                     </td>
                   </tr>
-                  <button class="switch__button button switch-btn" type="submit" [disabled]="!profileForm.valid" mat-button
-                    matSuffix mat-icon-button aria-label="Send" style="color: #f9f9f9;">
+                  <button class="switch__button button switch-btn" type="submit" [disabled]="!profileForm.valid"
+                    mat-button matSuffix mat-icon-button aria-label="Send" style="color: #f9f9f9;">
                     Add Profile
                   </button>
                 </table>
@@ -169,3 +185,5 @@
   <div class="col-md-1"></div>
 </div>
 
+  </mat-drawer-content>
+</mat-drawer-container>

@@ -52,6 +52,12 @@ export class BusinessComponent implements OnInit {
   businesses: Array<any>;
   filterData:any;
 
+  sideBarOpen = true;
+
+  sideBarToggler() {
+    this.sideBarOpen = !this.sideBarOpen;
+  }
+
   constructor(private Auth: AngularFireAuth, private db: AngularFireDatabase, private service: BusinessService,
     private formBuilder: FormBuilder,private route:ActivatedRoute) {
     this.Auth.authState.subscribe(auth => {

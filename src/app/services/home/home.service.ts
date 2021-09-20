@@ -43,6 +43,6 @@ export class HomeService {
   }
 
   getHood():Observable<Hood[]>{
-    return this.db.list<Hood>('/hoods').valueChanges()
+    return this.db.list<Hood>('/hoods').valueChanges();
   }
 }

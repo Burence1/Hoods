@@ -46,6 +46,13 @@ export class ChatfeedComponent implements OnInit {
   group: any[]
   groupname: string
 
+
+  sideBarOpen = true;
+
+  sideBarToggler() {
+    this.sideBarOpen = !this.sideBarOpen;
+  }
+
   constructor(private Auth: AngularFireAuth, private db: AngularFireDatabase,
     private formBuilder: FormBuilder, private service: ChatService, private route: ActivatedRoute) {
     this.Auth.authState.subscribe(auth => {

@@ -31,6 +31,13 @@ export const snapshotToArray = (snapshot: any) => {
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
+  sideBarOpen = false;
+
+  sideBarToggler() {
+    this.sideBarOpen = !this.sideBarOpen;
+  }
+
   user: any;
   currentHood:any;
   hoodData:any;
@@ -42,21 +49,8 @@ export class HomeComponent implements OnInit {
   data:any
   profile:any
   email:string
-
-  sideBarOpen = false;
-
   images: any[] = []
 
-  sideBarToggler() {
-    this.sideBarOpen = !this.sideBarOpen;
-  }
-  
-  isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe(Breakpoints.Handset)
-    .pipe(
-      map((result) => result.matches),
-      shareReplay()
-    );
 
   constructor(private Auth:AngularFireAuth,private db:AngularFireDatabase,
     private auth: AuthService,
@@ -69,13 +63,14 @@ export class HomeComponent implements OnInit {
       this.getUser().valueChanges().subscribe(a => {
         this.userName = a;
         this.data = this.userName.hood
+
+        this.hservice.getHood().subscribe(x => {
+          const data = x
+          console.log(this.data)
+          this.hood = data.filter(x => x.title === this.data)
+        })
                
       });
-      this.hservice.getHood().subscribe(x => {
-        const data = x
-        console.log(this.data)
-        this.hood = data.filter(x => x.title === this.data)
-      })
       this.getHoods().subscribe(x => {
         const data = x
         this.images = data.map(x => x.image)

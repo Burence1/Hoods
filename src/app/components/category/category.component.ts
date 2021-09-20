@@ -32,6 +32,12 @@ export class CategoryComponent implements OnInit {
 
   allCategories:any[];
 
+  sideBarOpen = true;
+
+  sideBarToggler() {
+    this.sideBarOpen = !this.sideBarOpen;
+  }
+
   constructor(private db: AngularFireDatabase,private route:Router,private service:BusinessService) {
    }
 

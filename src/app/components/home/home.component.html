@@ -1,115 +1,129 @@
-<div class="container-fluid page">
-  <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-10">
-      <div class="page__content shadow position-relative d-flex">
-        <div class="row" *ngFor="let data of hood">
-          <div class="col-md-7">
-            <div class="image">
-              <img [src]="data.image" alt="logo" class="img">
-            </div>
-          </div>
-          <div class="desc col-md-5">
-            <div class="mt-5">
-              <h1 class="back text-center">Welcome To<br> <a><strong>{{data.title}}</strong>!</a></h1>
-              <p class="wel-text">{{data.description}}</p>
-            </div>
-            <div class="location text-center small" style="vertical-align: bottom">
-              <img class="avatar" src="../../../assets/images/map.svg" />&nbsp;&nbsp;<span>{{data.location}}</span>
-            </div>
-          </div>
-        </div>
-      </div>
+<mat-drawer-container>
+  <mat-drawer mode="side" [opened]="sideBarOpen">
+    <app-sidenav></app-sidenav>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div class="d-flex page__box">
+      <app-nav (toggleSidebarForMe)="sideBarToggler()"></app-nav>
     </div>
-    <div class="col-md-1"></div>
-  </div>
-  <section class="pt-5 pb-5">
-    <div class="container">
+
+    <div class="container-fluid page">
       <div class="row">
         <div class="col-md-1"></div>
-        <div class="col-10">
-          <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
-  
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <div class="row" id="hoodData" *ngFor="let data of hood">
-  
-                  <div class="col-md-4 col-lg-4">
-                    <div class="card shadow">
-                      <img class="img-fluid" alt="" src="../../../assets/images/biz.jpg">
-                      <div class="card-body">
-                        <h2 class="card-title"><strong>Neighborhood Businesses</strong> </h2>
-                        <hr>
-                        <p class="card-text">We connect you to many professionals around Kenya</p>
-                        <a class="btn btn-lg view" href="/category"> View </a>
-                      </div>
-  
-                    </div>
-                  </div>
-                  <div class="col-md-4 col-lg-4">
-                    <div class="card shadow">
-                      <img class="img-fluid" alt="" src="../../../assets/images/chat.jpg">
-                      <div class="card-body">
-                        <h2 class="card-title"> <strong>Hood Chat Group</strong> </h2>
-                        <hr>
-                        <p class="card-text">With our new supporting chat feature you can reach out when in need.</p>
-                        <a class="btn btn-lg view" href="/chats"> View </a>
-  
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 col-lg-4">
-                    <div class="card shadow">
-                      <img class="img-fluid" alt="100%x280" src="../../../assets/images/article.jpg">
-                      <div class="card-body">
-                        <h2 class="card-title"> <strong>Posts</strong> </h2>
-                        <hr>
-                        <p class="card-text">See our help section on how to go through the app</p>
-                        <a class="btn btn-lg view" href="/about"> View </a>
-  
-                      </div>
-                    </div>
-                  </div>
-  
+        <div class="col-md-10">
+          <div class="page__content shadow position-relative d-flex">
+            <div class="row" *ngFor="let data of hood">
+              <div class="col-md-7">
+                <div class="image">
+                  <img [src]="data.image" alt="logo" class="img">
                 </div>
               </div>
-  
+              <div class="desc col-md-5">
+                <div class="mt-5">
+                  <h1 class="back text-center">Welcome To<br> <a><strong>{{data.title}}</strong>!</a></h1>
+                  <p class="wel-text">{{data.description}}</p>
+                </div>
+                <div class="location text-center small" style="vertical-align: bottom">
+                  <img class="avatar" src="../../../assets/images/map.svg" />&nbsp;&nbsp;<span>{{data.location}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-1"></div>
+      </div>
+      <section class="pt-5 pb-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-10">
+              <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <div class="row" id="hoodData" *ngFor="let data of hood">
+
+                      <div class="col-md-4 col-lg-4">
+                        <div class="card shadow">
+                          <img class="img-fluid" alt="" src="../../../assets/images/biz.jpg">
+                          <div class="card-body">
+                            <h2 class="card-title"><strong>Neighborhood Businesses</strong> </h2>
+                            <hr>
+                            <p class="card-text">We connect you to many professionals around Kenya</p>
+                            <a class="btn btn-lg view" href="/category"> View </a>
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-lg-4">
+                        <div class="card shadow">
+                          <img class="img-fluid" alt="" src="../../../assets/images/chat.jpg">
+                          <div class="card-body">
+                            <h2 class="card-title"> <strong>Hood Chat Group</strong> </h2>
+                            <hr>
+                            <p class="card-text">With our new supporting chat feature you can reach out when in need.
+                            </p>
+                            <a class="btn btn-lg view" href="/chatlist"> View </a>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-lg-4">
+                        <div class="card shadow">
+                          <img class="img-fluid" alt="100%x280" src="../../../assets/images/article.jpg">
+                          <div class="card-body">
+                            <h2 class="card-title"> <strong>Posts</strong> </h2>
+                            <hr>
+                            <p class="card-text">See our help section on how to go through the app</p>
+                            <a class="btn btn-lg view" href="/posts"> View </a>
+
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-md-1"></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="row pt-5 pb-5">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+          <div class="page__content shadow position-relative d-flex">
+            <div class="row" *ngFor="let data of hood">
+              <div class="col-md-7">
+                <div class="image">
+                  <img src="../../../assets/images/connect.jpg" alt="logo" class="img">
+                </div>
+              </div>
+              <div class="desc col-md-5">
+                <div class="mt-5">
+                  <h1 class="back text-center"><a><strong>Hood Directory</strong></a></h1>
+                  <p class="wel-text">Happiness lies outside yourself, is achieved through interacting with others.
+                    Self-forgetfulness should be one's goal,
+                    not self-absorption. The male, capable of only the latter, makes a virtue of an irremediable fault
+                    and sets up
+                    self-absorption, not only as a good but as a Philosophical Good.</p>
+                  <cite id="quote">~ Valerie Solanas</cite>
+                  <br>
+                  <br>
+                  <p>Checkout and connect with other local residents</p>
+                </div>
+                <div class="location text-center small" id="directory" style="vertical-align: bottom">
+                  <a class="btn btn-lg view " href="/directory"> View </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
         <div class="col-md-1"></div>
       </div>
     </div>
-  </section>
-
-  <div class="row pt-5 pb-5">
-    <div class="col-md-1"></div>
-    <div class="col-md-10">
-      <div class="page__content shadow position-relative d-flex">
-        <div class="row" *ngFor="let data of hood">
-          <div class="col-md-7">
-            <div class="image">
-              <img src="../../../assets/images/connect.jpg" alt="logo" class="img">
-            </div>
-          </div>
-          <div class="desc col-md-5">
-            <div class="mt-5">
-              <h1 class="back text-center"><a><strong>Hood Directory</strong></a></h1>
-              <p class="wel-text">Happiness lies outside yourself, is achieved through interacting with others. Self-forgetfulness should be one's goal,
-              not self-absorption. The male, capable of only the latter, makes a virtue of an irremediable fault and sets up
-              self-absorption, not only as a good but as a Philosophical Good.</p>
-              <cite id="quote">~ Valerie Solanas</cite>
-              <br>
-              <br>
-              <p>Checkout and connect with other local residents</p>
-            </div>
-            <div class="location text-center small" id="directory" style="vertical-align: bottom">
-              <a class="btn btn-lg view " href="/about"> View </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-1"></div>
-  </div>
-</div>
+  </mat-drawer-content>
+</mat-drawer-container>

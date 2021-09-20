@@ -18,6 +18,12 @@ export class DirectoryComponent implements OnInit {
   hood:string
   userdata:any
 
+  sideBarOpen = true;
+
+  sideBarToggler() {
+    this.sideBarOpen = !this.sideBarOpen;
+  }
+
   constructor(private service:DirectoryService,private Auth:AngularFireAuth,private db:AngularFireDatabase) {
     this.Auth.authState.subscribe(auth => {
       if (auth !== undefined && auth !== null) {

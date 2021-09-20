@@ -52,6 +52,12 @@ export class ProfileComponent implements OnInit {
   name:any[]
   myProf:any[];
 
+  sideBarOpen = true;
+
+  sideBarToggler() {
+    this.sideBarOpen = !this.sideBarOpen;
+  }
+
   constructor(
     private Auth: AngularFireAuth, private db: AngularFireDatabase, private service: ProfileService,
     private formBuilder: FormBuilder

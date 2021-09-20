@@ -49,6 +49,12 @@ export class PostsComponent implements OnInit {
   email: string
   data:any
 
+  sideBarOpen = true;
+
+  sideBarToggler() {
+    this.sideBarOpen = !this.sideBarOpen;
+  }
+
   constructor(private pservice:ProfileService,
     private Auth: AngularFireAuth, private db: AngularFireDatabase, private service: PostsService,
     private formBuilder: FormBuilder, private route: ActivatedRoute
