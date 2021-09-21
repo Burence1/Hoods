@@ -1,3 +1,4 @@
+import { ErrorHandlingComponent } from './components/error-handling/error-handling.component';
 import { DirectoryComponent } from './components/directory/directory.component';
 import { ChatfeedComponent } from './components/chatfeed/chatfeed.component';
 import { ConvolistComponent } from './components/convolist/convolist.component';
@@ -14,7 +15,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/auth/login/login.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  {path: '', redirectTo: 'login', pathMatch: 'full' },
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},
   {path:'reset',component:PasswordResetComponent},
@@ -26,7 +27,8 @@ const routes: Routes = [
   {path:'posts',component:PostsComponent},
   {path:'chatlist',component:ConvolistComponent},
   {path:'chatfeed/:groupname',component:ChatfeedComponent},
-  {path:'directory',component:DirectoryComponent}
+  {path:'directory',component:DirectoryComponent},
+  {path:'**',component:ErrorHandlingComponent}
 ];
 
 @NgModule({

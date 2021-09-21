@@ -27,10 +27,10 @@
                     (ngSubmit)="newPost(postForm.value);postForm.reset()">
                     <h2>Add Post</h2>
                     <div class="new-room">
-                      <table>
+                      <table class="p-2">
                         <tr>
                           <td>
-                            <mat-form-field class="example">
+                            <mat-form-field class="example m-1">
                               <mat-label>title</mat-label>
                               <input matInput placeholder="Enter title" formControlName="title"
                                 [errorStateMatcher]="matcher">
@@ -42,7 +42,7 @@
                             </mat-form-field>
                           </td>
                           <td>
-                            <mat-form-field class="example">
+                            <mat-form-field class="example m-1">
                               <mat-label>Content</mat-label>
                               <textarea matInput placeholder="Enter content" formControlName="content"
                                 [errorStateMatcher]="matcher"></textarea>
@@ -56,8 +56,8 @@
                           </td>
                         </tr>
                         <tr>
-                          <td>
-                            <input type="file" placeholder="Enter Image" formControlName="image"
+                          <td class="text-centre">
+                            <input type="file" formControlName="image"
                               (change)="showPreview($event)">
                           </td>
                         </tr>
@@ -94,14 +94,13 @@
                 <span class="card__date__month">{{data.date | date:'MMM'}}</span>
               </div>
               <div class="card__body">
-                <div class="card__category"><a href="#">Category</a></div>
-                <div class="card__title"><a href="#">{{data.title}}</a></div>
-                <div class="card__subtitle">Donec posuere vulputate</div>
+                <div class="card__category"><a href="#">{{data.hood}}</a></div>
+                <div class="card__title"><a href="#">{{data.title | slice:0:100}}</a></div>
+                <!-- <div class="card__subtitle">Donec posuere vulputate</div> -->
                 <p class="card__description">{{data.content | slice:0:250}}</p>
               </div>
               <footer class="card__footer">
-                <span class="icon icon--time">6 min</span>
-                <span class="icon icon--comment"><a href="#">2 comments</a></span>
+                <span class="icon icon--time">~ {{data.author}}</span>
               </footer>
             </article>
           </div>

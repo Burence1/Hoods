@@ -22,10 +22,8 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { NavComponent } from './components/nav/nav.component';
 
 // services
-import { AuthService } from './services/auth/auth.service';
-import { HoodsService } from './services/hoods/hoods.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { MaterialModule } from './modules/material/material/material.module';
 // angular material extensions
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -54,6 +52,7 @@ import { PostsComponent } from './components/posts/posts.component';
 import { ConvolistComponent } from './components/convolist/convolist.component';
 import { ChatfeedComponent } from './components/chatfeed/chatfeed.component';
 import { DirectoryComponent } from './components/directory/directory.component';
+import { ErrorHandlingComponent } from './components/error-handling/error-handling.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +71,7 @@ import { DirectoryComponent } from './components/directory/directory.component';
     ConvolistComponent,
     ChatfeedComponent,
     DirectoryComponent,
+    ErrorHandlingComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,6 +83,7 @@ import { DirectoryComponent } from './components/directory/directory.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    MaterialModule,
 
     // Angular material
     MatFormFieldModule,
