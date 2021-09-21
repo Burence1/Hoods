@@ -75,7 +75,6 @@ export class ProfileComponent implements OnInit {
         firebase.database().ref('business/').on('value', resp => {
           const profileData = snapshotToArray(resp);
           this.business = profileData.filter(x => x.owner === this.username);
-          console.log(this.business)
         });
         firebase.database().ref('posts/').on('value',resp => {
           const postsData = snapshotToArray(resp);
@@ -104,21 +103,11 @@ export class ProfileComponent implements OnInit {
       hood: [null, Validators.required],
     });
     this.getHoods()
-    
-    // this.findProfile()
   }
-
-  // findProfile(){
-  //   this.service.getProfile().subscribe(x => {
-  //     const data = x
-  //     this.myProf = data.filter(x => x.email === this.email)
-  //   })
-  // }
 
   getHoods() {
     return firebase.database().ref('hoods/').once("value", snap => {
       this.hoods = snapshotToArray(snap)
-      console.log(this.hoods)
     })
   }
 

@@ -5,6 +5,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './modules/material/material/material.module';
+
 
 // firebase extensions
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -20,32 +23,6 @@ import { HomeComponent } from './components/home/home.component';
 import { BusinessComponent } from './components/business/business.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { NavComponent } from './components/nav/nav.component';
-
-// services
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './modules/material/material/material.module';
-// angular material extensions
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { HoodComponent } from './components/hood/hood.component';
-import { MatCardModule } from '@angular/material/card';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatBadgeModule } from '@angular/material/badge';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatCarouselModule } from 'ng-mat-carousel';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatListModule } from '@angular/material/list';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatSelectModule } from '@angular/material/select';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatTableModule } from '@angular/material/table'
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CategoryComponent } from './components/category/category.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PostsComponent } from './components/posts/posts.component';
@@ -53,6 +30,7 @@ import { ConvolistComponent } from './components/convolist/convolist.component';
 import { ChatfeedComponent } from './components/chatfeed/chatfeed.component';
 import { DirectoryComponent } from './components/directory/directory.component';
 import { ErrorHandlingComponent } from './components/error-handling/error-handling.component';
+import { HoodComponent } from './components/hood/hood.component';
 
 @NgModule({
   declarations: [
@@ -84,25 +62,6 @@ import { ErrorHandlingComponent } from './components/error-handling/error-handli
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MaterialModule,
-
-    // Angular material
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatCardModule,
-    MatSnackBarModule,
-    MatToolbarModule,
-    MatDividerModule,
-    MatSidenavModule,
-    MatBadgeModule,
-    MatButtonModule,
-    MatCarouselModule.forRoot(),
-    MatListModule,
-    MatDialogModule,
-    MatSelectModule,
-    MatMenuModule,
-    MatTableModule,
-    MatProgressSpinnerModule,
 
   ],
   providers: [],

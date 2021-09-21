@@ -63,20 +63,7 @@ export class ChatfeedComponent implements OnInit {
         this.userData = a;
         this.data = this.userData.hood
         this.chatname = this.userData.displayName;
-
-        // this.groupname = this.route.snapshot.params.name;
-        // console.log(this.groupname)
-        // firebase.database().ref('chats/').on('value', resp => {
-        //   const chats = snapshotToArray(resp);
-        //   this.chats = chats.filter(x => x.groupname === this.groupname);
-        // });
-        // this.groupname = this.route.snapshot.params.name;
-        // firebase.database().ref('chatgroups/').on('value', resp => {
-        //   console.log(this.groupname)
-        //   const data = snapshotToArray(resp);
-        //   this.group = data.filter(x => x.hood === this.groupname);
-        //   console.log(this.group);
-        // });
+       
       });
       this.groupname = this.route.snapshot.params.groupname
       this.service.getMessages().subscribe(x => {

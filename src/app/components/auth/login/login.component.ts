@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit {
 
   emailLogin(formData:any){
     if (formData.valid) {
-      console.log(formData.value);
       this.auth.login(formData.value.email, formData.value.password);
     }
   }

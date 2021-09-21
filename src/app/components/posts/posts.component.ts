@@ -89,13 +89,6 @@ export class PostsComponent implements OnInit {
     })
   }
 
-  // getPosts(){
-  //   this.service.getPosts().subscribe(x => {
-  //     const data = x
-  //     this.postData = data.filter(x => x.hood === this.profile[0].hood)
-  //   })
-  // }
-
   ngOnInit(): void {
     this.postForm = this.formBuilder.group({
       title: [null, Validators.required],
@@ -103,7 +96,6 @@ export class PostsComponent implements OnInit {
       image: [null, Validators.required],
     });
     this.getProfile()
-    // this.getPosts()
   }
 
   newPost(form: any) {

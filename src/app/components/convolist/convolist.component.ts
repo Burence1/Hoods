@@ -63,7 +63,6 @@ export class ConvolistComponent implements OnInit {
       this.getUser().valueChanges().subscribe(a => {
         this.userData = a;
         this.data = this.userData.hood
-        console.log(this.data)
         this.chatname = this.userData.displayName;
 
         this.service.getConvoList().subscribe(x => {

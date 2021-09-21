@@ -19,7 +19,6 @@ export class AuthService {
 
   constructor(private db:AngularFireDatabase,private router:Router,private afAuth:AngularFireAuth) { 
     this.user$ = afAuth.authState;
-    console.log(this.user$)
   }
 
   fetchProfileApi(id: string): Observable<any> {

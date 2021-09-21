@@ -80,7 +80,6 @@ export class ChatService {
           this.img = url;
           group.image = this.img
           group.hood = this.data
-          console.log(group.image)
 
           this.ref.orderByChild('title').equalTo(group.title).once('value', (snapshot: any) => {
             if (snapshot.exists()) {

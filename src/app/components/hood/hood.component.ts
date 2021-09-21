@@ -66,10 +66,9 @@ export class HoodComponent implements OnInit {
       if (auth !== undefined && auth !== null) {
         this.user = auth;
       }
-      this.getUser().valueChanges().subscribe(a => {
+      this.service.getUser().valueChanges().subscribe(a => {
         this.userName = a;
         this.data = this.userName.hood
-        console.log(this.data)
         this.chatname = this.userName.displayName;
       });
     });
@@ -83,12 +82,6 @@ export class HoodComponent implements OnInit {
       image: [null, Validators.required],
     });
     this.getHood()
-  }
-
-  getUser() {
-    const userId = this.user.uid;
-    const path = `/users/${userId}`;
-    return this.db.object(path);
   }
 
   newHood(form: any) {

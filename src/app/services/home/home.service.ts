@@ -23,23 +23,6 @@ export class HomeService {
   email:string
 
   constructor(private pservice: ProfileService, private Auth: AngularFireAuth, private db:AngularFireDatabase) {
-    this.Auth.authState.subscribe(auth => {
-      if (auth !== undefined && auth !== null) {
-        this.user = auth;
-      }
-      this.getUser().valueChanges().subscribe(res => {
-        this.userData = res;
-        this.username = this.userData.displayName
-        this.occupant = this.userData.hood;
-        this.email = this.userData.email
-      });
-    });
-  }
-
-  getUser() {
-    const userId = this.user.uid;
-    const path = `/users/${userId}`;
-    return this.db.object(path);
   }
 
   getHood():Observable<Hood[]>{

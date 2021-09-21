@@ -50,7 +50,6 @@ export class BusinessService {
       this.getUser().valueChanges().subscribe(res => {
         this.userName = res;
         this.data = this.userName.hood
-        console.log(this.data)
         this.chatname = this.userName.displayName;
       });
     });
@@ -65,7 +64,6 @@ export class BusinessService {
   getCategory():Observable<Category[]>{
     return this.db.list<Category>('/categories').valueChanges();
   }
-
   
   addBusiness(form: any, selectedImage: any) {
     this.ref = firebase.database().ref('business/');
@@ -78,13 +76,10 @@ export class BusinessService {
           const business = form;
           business.owner = this.chatname;
           business.hood = this.data;
-          console.log(business.hood)
           this.img = url;
           business.image = this.img
-          console.log(business.image)
           const newHood = firebase.database().ref('business/').push();
           newHood.set(business);
-
         })
       })
     ).subscribe();
@@ -101,7 +96,6 @@ export class BusinessService {
           const business = form;
           this.img = url;
           business.image = this.img
-          console.log(business.image)
 
           this.ref.orderByChild('title').equalTo(business.title).once('value', (snapshot: any) => {
             if (snapshot.exists()) {
@@ -109,8 +103,8 @@ export class BusinessService {
                 duration: 2000
               });
             } else {
-              const newHood = firebase.database().ref('categories/').push();
-              newHood.set(business);
+              const newCat = firebase.database().ref('categories/').push();
+              newCat.set(business);
             }
           });
         })

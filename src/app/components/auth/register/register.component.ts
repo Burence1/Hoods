@@ -7,10 +7,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import { AngularFireDatabase } from '@angular/fire/database';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { ModalService } from 'src/app/services/modal/modal.service';
-
 
 export const snapshotToArray = (snapshot: any) => {
   const returnArr: any[] = [];
@@ -38,24 +34,16 @@ export class RegisterComponent implements OnInit {
   displayName: string;
   hoods: Array<any>;
 
-  constructor(private auth: AuthService, private hservice: HoodsService,private modal:ModalService) { }
+  constructor(private auth: AuthService, private hservice: HoodsService) { }
 
   ngOnInit(): void {
     this.getHoods()
   }
 
-  open(list: any) {
-    this.modal.openDialog(list)
-  }
-
-  closeModal() {
-    this.modal.closeModal()
-  }
 
   getHoods() {
     return firebase.database().ref('hoods/').once("value", snap => {
       this.hoods = snapshotToArray(snap)
-      console.log(this.hoods)
     })
   }
 

@@ -39,16 +39,6 @@ export class HoodsService {
   constructor(private db: AngularFireDatabase,
     private Auth: AngularFireAuth, private router: Router,
     private snackBar: MatSnackBar,private storage:AngularFireStorage) {
-    this.Auth.authState.subscribe(auth => {
-      if (auth !== undefined && auth !== null) {
-        this.user = auth;
-      }
-      this.getUser().valueChanges().subscribe(res => {
-        this.userData = res;
-        this.username = this.userData.displayName
-        this.occupant = this.userData.hood;
-      });
-    });
   }
 
   getUser() {
@@ -59,7 +49,6 @@ export class HoodsService {
 
   getHood(){
     const data = this.hood
-    console.log(this.hood)
     return data
   }
 
@@ -75,7 +64,6 @@ export class HoodsService {
           hood.admin = this.username;
           this.img = url;
           hood.image = this.img
-          console.log(hood.image)
 
           this.ref.orderByChild('title').equalTo(hood.title).once('value', (snapshot: any) => {
             if (snapshot.exists()) {

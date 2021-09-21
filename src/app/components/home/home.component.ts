@@ -66,7 +66,6 @@ export class HomeComponent implements OnInit {
 
         this.hservice.getHood().subscribe(x => {
           const data = x
-          console.log(this.data)
           this.hood = data.filter(x => x.title === this.data)
         })
                
@@ -74,7 +73,6 @@ export class HomeComponent implements OnInit {
       this.getHoods().subscribe(x => {
         const data = x
         this.images = data.map(x => x.image)
-        console.log(this.images)
       })
     })
   }

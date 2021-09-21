@@ -37,26 +37,10 @@ export class PostsService {
   constructor(private db: AngularFireDatabase,
     private Auth: AngularFireAuth, private router: Router,
     private snackBar: MatSnackBar, private storage: AngularFireStorage) {
-    this.Auth.authState.subscribe(auth => {
-      if (auth !== undefined && auth !== null) {
-        this.user = auth;
-      }
-      this.getUser().valueChanges().subscribe(res => {
-        this.userData = res;
-        this.data = this.userData.hood
-        this.chatname = this.userData.displayName;
-      });
-    });
   }
 
   getPosts():Observable<Posts[]>{
     return this.db.list<Posts>('/posts').valueChanges();
-  }
-
-  getUser() {
-    const userId = this.user.uid;
-    const path = `/users/${userId}`;
-    return this.db.object(path);
   }
 
   addPost(form: any, selectedImage: any) {

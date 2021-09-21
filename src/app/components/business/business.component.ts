@@ -67,17 +67,14 @@ export class BusinessComponent implements OnInit {
       this.getUser().valueChanges().subscribe(a => {
         this.userName = a;
         this.data = this.userName.hood
-        console.log(this.data)
         this.chatname = this.userName.displayName;
 
         this.businessCategory = this.route.snapshot.params.businesses;
-        console.log(this.businessCategory)
         firebase.database().ref('business/').on('value', resp => {
           const businessData = snapshotToArray(resp);
           this.businessHood = businessData.filter(x => x.hood === this.data && x.category === this.businessCategory);
 
           this.allBusiness = businessData
-          console.log(this.allBusiness)
         });
       });
     });
@@ -86,7 +83,6 @@ export class BusinessComponent implements OnInit {
   getCategory() {
     return firebase.database().ref('categories/').once("value", snap => {
       this.businesses = snapshotToArray(snap)
-      console.log(this.businesses)
     })
   }
 

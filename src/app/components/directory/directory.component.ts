@@ -41,7 +41,6 @@ export class DirectoryComponent implements OnInit {
     this.service.getProfiles().subscribe(x => {
       const data = x
       this.profiles = data.filter(x => x.hood === this.hood)
-      console.log(this.profiles)
     })
   }
 

@@ -41,30 +41,6 @@ export class ProfileService {
   constructor(private db: AngularFireDatabase,
     private Auth: AngularFireAuth, private router: Router,
     private snackBar: MatSnackBar, private storage: AngularFireStorage) {
-    this.Auth.authState.subscribe(auth => {
-      if (auth !== undefined && auth !== null) {
-        this.user = auth;
-      }
-      this.getUser().valueChanges().subscribe(res => {
-        this.userData = res;
-        this.username = this.userData.displayName
-        this.occupant = this.userData.hood;
-        this.email = this.userData.email
-
-
-        firebase.database().ref('users/').on('value', resp => {
-          const profileData = snapshotToArray(resp);
-          this.profile = profileData.filter(x => x.email === this.email);
-          console.log(this.profile)
-        });
-
-      });
-    });
-  }
-  getUser() {
-    const userId = this.user.uid;
-    const path = `/users/${userId}`;
-    return this.db.object(path);
   }
 
   getProfile():Observable<Profile[]>{
@@ -83,7 +59,6 @@ export class ProfileService {
           profile.email = this.user.email
           this.img = url;
           profile.image = this.img
-          console.log(profile.image)
 
           const userId = this.user.uid;
           firebase.database().ref('users/' + userId).update(profile);
@@ -92,17 +67,6 @@ export class ProfileService {
             displayName: profile.name
           }
           this.db.object('users/' + userId).update(data);
-
-          // this.ref.orderByChild('email').equalTo(profile.email).once('value', (snapshot: any) => {
-          //   if (snapshot.exists()) {
-          //     this.snackBar.open('Profile already exist!', 'undo', {
-          //       duration: 2000
-          //     });
-          //   } else {
-
-
-          //   }
-          // });
         })
       })
     ).subscribe();
